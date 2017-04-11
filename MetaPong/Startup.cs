@@ -10,6 +10,8 @@ namespace MetaPong
     {
         static void Main(string[] args)
         {
+            Console.BufferHeight = Console.WindowHeight;
+            Console.BufferWidth = Console.WindowWidth;
         }
     }
 }
