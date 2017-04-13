@@ -1,7 +1,5 @@
 ﻿namespace MetaPong.Utilities.ScreenElements
 {
-    using System;
-
     public abstract class ScreenElement
     {
         protected readonly int Column;
