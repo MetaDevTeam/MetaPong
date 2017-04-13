@@ -168,7 +168,7 @@
                 }
             }
 
-            if (ballPositionX >= Console.WindowWidth - 3 - 1)
+            if (ballPositionX >= Console.WindowWidth - 4)
             {
                 if (ballPositionY >= secondPlayerPosition
                     && ballPositionY <= secondPlayerPosition + secondPlayerPadSize)
