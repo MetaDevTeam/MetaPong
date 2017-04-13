@@ -229,7 +229,7 @@
 
         static void Main(string[] args)
         {
-            //RunInterfaceDemo();
+            RunInterfaceDemo();
 
             RemoveScrollBars();
             SetInitialPosition();
