@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScreenElements\Label.cs" />
+    <Compile Include="ScreenElements\ScreenGroup.cs" />
+    <Compile Include="ScreenElements\ScreenLable.cs" />
     <Compile Include="ScreenElements\ScreenElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

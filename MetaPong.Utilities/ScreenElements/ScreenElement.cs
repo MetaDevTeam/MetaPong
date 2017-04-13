@@ -4,13 +4,13 @@
 
     public abstract class ScreenElement
     {
-        protected int _x;
-        protected int _y;
+        protected readonly int Column;
+        protected readonly int Row;
 
-        public ScreenElement(int x, int y)
+        protected ScreenElement(int row, int column)
         {
-            _x = x;
-            _y = y;
+            Column = column;
+            Row = row;
         }
 
         public abstract void Print();
