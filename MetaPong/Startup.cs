@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace MetaPong
+﻿namespace MetaPong
 {
+    using System;
+    using System.Threading;
+    using Utilities.ScreenElements;
+
     class Startup
     {
         static int firstPlayerPadSize = 7;
@@ -58,7 +55,7 @@ namespace MetaPong
             Console.SetCursorPosition(x, y);
             Console.Write(symbol);
         }
-        
+
         static void PrintResult()
         {
             Console.SetCursorPosition(Console.WindowWidth / 2 - 1, 0);
@@ -71,7 +68,7 @@ namespace MetaPong
             secondPlayerPosition = Console.WindowHeight / 2 - secondPlayerPadSize / 2;
             SetBallOnStartPosition();
         }
-        
+
         static void MoveFirstPlayerDown()
         {
             if (firstPlayerPosition < Console.WindowHeight - firstPlayerPadSize)
@@ -121,7 +118,7 @@ namespace MetaPong
                 }
             }
         }
-        
+
         static void SetBallOnStartPosition()
         {
             ballPositionX = Console.WindowWidth / 2;
@@ -164,7 +161,7 @@ namespace MetaPong
 
             if (ballPositionX < 3)
             {
-                if (ballPositionY >= firstPlayerPosition 
+                if (ballPositionY >= firstPlayerPosition
                     && ballPositionY <= firstPlayerPosition + firstPlayerPadSize)
                 {
                     ballDirectionRight = true;
@@ -201,8 +198,39 @@ namespace MetaPong
             }
         }
 
+        private static void RunInterfaceDemo()
+        {
+            // Setup screen
+            int windowWidth = Console.LargestWindowWidth - 5;
+            int windowHeight = Console.LargestWindowHeight - 5;
+
+
+            Console.BufferWidth = windowWidth;
+            Console.BufferHeight = windowHeight;
+            Console.WindowWidth = windowWidth;
+            Console.WindowHeight = windowHeight;
+
+            var optionsScreen = new ScreenGroup();
+
+            var startColumn = (windowWidth / 2) - 5;
+            var startRow = (windowHeight / 2) - 3;
+
+            optionsScreen.Add(new ScreenLable(startRow, startColumn, "1 PLAYER"));
+            optionsScreen.Add(new ScreenLable(startRow + 1, startColumn, "2 PLAYERS"));
+            optionsScreen.Add(new ScreenLable(startRow + 2, startColumn, "OPTIONS"));
+            optionsScreen.Add(new ScreenLable(startRow + 3, startColumn, "SAVE GAME"));
+            optionsScreen.Add(new ScreenLable(startRow + 4, startColumn, "LOAD GAME"));
+            optionsScreen.Add(new ScreenLable(startRow + 5, startColumn, "EXIT"));
+
+            optionsScreen.Print();
+
+            Console.ReadKey(true);
+        }
+
         static void Main(string[] args)
         {
+            //RunInterfaceDemo();
+
             RemoveScrollBars();
             SetInitialPosition();
 
