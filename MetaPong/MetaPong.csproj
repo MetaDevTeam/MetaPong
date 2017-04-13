@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetaPong.Utilities\MetaPong.Utilities.csproj">
+      <Project>{B2544DA4-FF42-4210-AEA8-2E7350A30293}</Project>
+      <Name>MetaPong.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
