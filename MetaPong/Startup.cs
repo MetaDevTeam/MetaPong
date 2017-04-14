@@ -215,12 +215,12 @@
             var startColumn = (windowWidth / 2) - 5;
             var startRow = (windowHeight / 2) - 3;
 
-            optionsScreen.Add(new ScreenLable(startRow, startColumn, "1 PLAYER"));
-            optionsScreen.Add(new ScreenLable(startRow + 1, startColumn, "2 PLAYERS"));
-            optionsScreen.Add(new ScreenLable(startRow + 2, startColumn, "OPTIONS"));
-            optionsScreen.Add(new ScreenLable(startRow + 3, startColumn, "SAVE GAME"));
-            optionsScreen.Add(new ScreenLable(startRow + 4, startColumn, "LOAD GAME"));
-            optionsScreen.Add(new ScreenLable(startRow + 5, startColumn, "EXIT"));
+            optionsScreen.Add(new ScreenLabel(startRow, startColumn, "1 PLAYER"));
+            optionsScreen.Add(new ScreenLabel(startRow + 1, startColumn, "2 PLAYERS"));
+            optionsScreen.Add(new ScreenLabel(startRow + 2, startColumn, "OPTIONS"));
+            optionsScreen.Add(new ScreenLabel(startRow + 3, startColumn, "SAVE GAME"));
+            optionsScreen.Add(new ScreenLabel(startRow + 4, startColumn, "LOAD GAME"));
+            optionsScreen.Add(new ScreenLabel(startRow + 5, startColumn, "EXIT"));
 
             optionsScreen.Print();
 

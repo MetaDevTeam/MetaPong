@@ -3,15 +3,15 @@
     using System;
 
     /// <summary>
-    /// A class for printing text lables in the console.
+    /// A class for printing text labels in the console.
     /// It can be used for the TUI buttons, points and tex elements
     /// </summary>
     /// <seealso cref="MetaPong.Utilities.ScreenElements.ScreenElement" />
-    public class ScreenLable: ScreenElement
+    public class ScreenLabel: ScreenElement
     {
         private readonly string _content;
 
-        public ScreenLable(int row, int column, string content) 
+        public ScreenLabel(int row, int column, string content) 
             : base(row, column)
         {
             _content = content;
