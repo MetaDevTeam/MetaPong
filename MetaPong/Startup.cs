@@ -2,6 +2,9 @@
 {
     using System;
     using System.Threading;
+    using CmdArt;
+    using CmdArt.Screen;
+    using Utilities;
     using Utilities.ScreenElements;
 
     class Startup
@@ -212,17 +215,63 @@
 
             var optionsScreen = new ScreenGroup();
 
-            var startColumn = (windowWidth / 2) - 5;
-            var startRow = (windowHeight / 2) - 3;
+            int startColumn = (windowWidth / 2) - 5;
+            int startRow = (windowHeight / 2) - 3;
+            int playerHeight = 8;
+            int player1Row = random.Next(1, windowHeight-playerHeight);
+            int player2Row = random.Next(1, windowHeight-playerHeight);
 
+            ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
+            ScreenLayout playerOne = Composer.GetBox(2, playerHeight, player1Row, 0);
+            ScreenLayout playerTwo = Composer.GetBox(2, playerHeight, player2Row, windowWidth-2);
+
+            // Ball
+            int ballSize = 2;
+            int ballRow = random.Next(1,windowHeight - ballSize);
+            int ballHeight = random.Next(1, windowWidth - ballSize);
+            ScreenLayout ball = Composer.GetBox(2, 2, ballRow, ballHeight);
+
+            optionsScreen.Add(menuFrame);
+            optionsScreen.Add(playerOne);
+            optionsScreen.Add(playerTwo);
+            optionsScreen.Add(ball);
             optionsScreen.Add(new ScreenLabel(startRow, startColumn, "1 PLAYER"));
             optionsScreen.Add(new ScreenLabel(startRow + 1, startColumn, "2 PLAYERS"));
             optionsScreen.Add(new ScreenLabel(startRow + 2, startColumn, "OPTIONS"));
             optionsScreen.Add(new ScreenLabel(startRow + 3, startColumn, "SAVE GAME"));
             optionsScreen.Add(new ScreenLabel(startRow + 4, startColumn, "LOAD GAME"));
             optionsScreen.Add(new ScreenLabel(startRow + 5, startColumn, "EXIT"));
+            optionsScreen.Add(new ScreenLabel(0, startColumn+4, $"{random.Next(0,10)}-{random.Next(0,10)}"));
+
+            RenderLogo();
+
+            Console.CursorVisible = false;
 
             optionsScreen.Print();
+
+            Console.ReadKey(true);
+        }
+
+        static void RenderLogo()
+        {
+            string imageFile = "../../../Images/software-university-logo.jpg";
+            var screen = new TerminalScreen();
+
+            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 25));
+
+            // Create a window at position (5,5) on the screen, with size 50x50
+            var window = screen.CreateNewWindow(new Region(50, 2, 20, 25));
+
+            // Set a source buffer in the window, big enough to hold the image
+            // We want to focus on the region of the window at point (7, 4), where the size is
+            // still 20x16
+            var buffer = screen.BufferFactory.Create(image.Size);
+            window.SetSourceBuffer(buffer, new Location(0, 0));
+
+            // Render the image to the Window's buffer, then render the screen to the Console
+            // including the window's buffer
+            image.RenderTo(window.SourceBuffer);
+            screen.Render(includeWindows: true);
 
             Console.ReadKey(true);
         }

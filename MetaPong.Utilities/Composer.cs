@@ -1,29 +1,10 @@
 ﻿namespace MetaPong.Utilities
 {
-    public class Composer
-    {
-        //╔
-        private const char CornerTopL = (char)9556;
-        //╚ 
-        private const char CornerBottomL = (char)9562;
-        //║
-        private const char LineVertical = (char)9553;
-        //╗
-        private const char CornerTopR = (char)9559;
-        //╝
-        private const char CornerBottomR = (char)9565;
-        //═ 
-        private const char LineHorizontal = (char)9552;
-        //╠ 
-        private const char CornerMiddleL = (char)9568;
-        //╣
-        private const char CornerMiddleR = (char)9571;
-        //╦
-        private const char CornerMiddleTop = (char)9574;
-        //╩
-        private const char CornerMiddleBottom = (char)9577;
+    using ScreenElements;
 
-        public static string[] Compose(char[][] matrix)
+    public partial class Composer
+    {
+       public static string[] Compose(char[][] matrix)
         {
             string[] layout = new string[matrix.Length];
 
@@ -142,5 +123,15 @@
                 }
             }
         }
+
+        public static ScreenLayout GetBox(int width, int height, int startRow, int startColumn)
+        {
+            string[] matrix = Compose(MakeBoxLayout(width, height));
+            var box = new ScreenLayout(startRow, startColumn);
+            box.SetLayout(matrix);
+
+            return box;
+        }
+
     }
 }
