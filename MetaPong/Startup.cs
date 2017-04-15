@@ -1,202 +1,18 @@
 ﻿namespace MetaPong
 {
+    using PongElements;
     using System;
     using System.Threading;
     using Utilities.ScreenElements;
 
     class Startup
     {
-        static int firstPlayerPadSize = 7;
-        static int secondPlayerPadSize = 7;
-        static int ballPositionX = 5;
-        static int ballPositionY = 5;
-        static bool ballDirectionUp = true;
-        static bool ballDirectionRight = true;
-        static int firstPlayerPosition = 5;
-        static int secondPlayerPosition = 5;
-        static int firstPlayerResults = 0;
-        static int secondPlayerResults = 0;
-        static Random random = new Random();
-
-        static void RemoveScrollBars()
-        {
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BufferHeight = Console.WindowHeight;
-            Console.BufferWidth = Console.WindowWidth;
-
-        }
-
-        static void DrawFirstPlayer()
-        {
-            for (int y = firstPlayerPosition; y < firstPlayerPosition + firstPlayerPadSize; y++)
-            {
-                PrintAtPosition(0, y, '[');
-                PrintAtPosition(1, y, ']');
-            }
-        }
-
-        static void DrawSecondPlayer()
-        {
-            for (int y = secondPlayerPosition; y < secondPlayerPosition + secondPlayerPadSize; y++)
-            {
-                PrintAtPosition(Console.WindowWidth - 1, y, ']');
-                PrintAtPosition(Console.WindowWidth - 2, y, '[');
-            }
-        }
-
-        static void DrawBall()
-        {
-            PrintAtPosition(ballPositionX, ballPositionY, 'O');
-        }
-
-        static void PrintAtPosition(int x, int y, char symbol)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write(symbol);
-        }
-
-        static void PrintResult()
-        {
-            Console.SetCursorPosition(Console.WindowWidth / 2 - 1, 0);
-            Console.Write($"{firstPlayerResults}-{secondPlayerResults}");
-        }
-
-        static void SetInitialPosition()
-        {
-            firstPlayerPosition = Console.WindowHeight / 2 - firstPlayerPadSize / 2;
-            secondPlayerPosition = Console.WindowHeight / 2 - secondPlayerPadSize / 2;
-            SetBallOnStartPosition();
-        }
-
-        static void MoveFirstPlayerDown()
-        {
-            if (firstPlayerPosition < Console.WindowHeight - firstPlayerPadSize)
-            {
-                firstPlayerPosition++;
-            }
-        }
-
-        static void MoveFirstPlayerUp()
-        {
-            if (firstPlayerPosition > 0)
-            {
-                firstPlayerPosition--;
-            }
-        }
-
-        static void MoveSecondPlayerDown()
-        {
-            if (secondPlayerPosition < Console.WindowHeight - secondPlayerPadSize)
-            {
-                secondPlayerPosition++;
-            }
-        }
-
-        static void MoveSecondPlayerUp()
-        {
-            if (secondPlayerPosition > 0)
-            {
-                secondPlayerPosition--;
-            }
-        }
-
-        static void MoveSecondPlayerBot()
-        {
-            int randomNum = random.Next(1, 101);
-
-            if (randomNum <= 60)
-            {
-                if (ballDirectionUp == true)
-                {
-                    MoveSecondPlayerUp();
-                }
-
-                else
-                {
-                    MoveSecondPlayerDown();
-                }
-            }
-        }
-
-        static void SetBallOnStartPosition()
-        {
-            ballPositionX = Console.WindowWidth / 2;
-            ballPositionY = Console.WindowHeight / 2;
-        }
-
-        static void MoveBall()
-        {
-            if (ballPositionY == 0)
-            {
-                ballDirectionUp = false;
-            }
-
-            if (ballPositionY == Console.WindowHeight - 1)
-            {
-                ballDirectionUp = true;
-            }
-
-            if (ballPositionX == Console.WindowWidth - 1)
-            {
-                SetBallOnStartPosition();
-                ballDirectionRight = false;
-                ballDirectionUp = true;
-                firstPlayerResults++;
-                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
-                Console.WriteLine("First Player Wins!");
-                Console.ReadKey();
-            }
-
-            if (ballPositionX == 0)
-            {
-                SetBallOnStartPosition();
-                ballDirectionRight = true;
-                ballDirectionUp = true;
-                secondPlayerResults++;
-                Console.SetCursorPosition(Console.WindowWidth / 2, Console.WindowHeight / 2);
-                Console.WriteLine("Second Player Wins!");
-                Console.ReadKey();
-            }
-
-            if (ballPositionX < 3)
-            {
-                if (ballPositionY >= firstPlayerPosition
-                    && ballPositionY <= firstPlayerPosition + firstPlayerPadSize)
-                {
-                    ballDirectionRight = true;
-                }
-            }
-
-            if (ballPositionX >= Console.WindowWidth - 4)
-            {
-                if (ballPositionY >= secondPlayerPosition
-                    && ballPositionY <= secondPlayerPosition + secondPlayerPadSize)
-                {
-                    ballDirectionRight = false;
-                }
-            }
-
-            if (ballDirectionUp)
-            {
-                ballPositionY--;
-            }
-
-            else
-            {
-                ballPositionY++;
-            }
-
-            if (ballDirectionRight)
-            {
-                ballPositionX++;
-            }
-
-            else
-            {
-                ballPositionX--;
-            }
-        }
+        //static void RemoveScrollBars()
+        //{
+        //    Console.BufferHeight = Console.WindowHeight;
+        //    Console.BufferWidth = Console.WindowWidth;
+        //
+        //}
 
         private static void RunInterfaceDemo()
         {
@@ -209,6 +25,9 @@
             Console.BufferHeight = windowHeight;
             Console.WindowWidth = windowWidth;
             Console.WindowHeight = windowHeight;
+            
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             var optionsScreen = new ScreenGroup();
 
@@ -231,8 +50,9 @@
         {
             RunInterfaceDemo();
 
-            RemoveScrollBars();
-            SetInitialPosition();
+            //RemoveScrollBars();
+
+            SetPosition.SetInitialPosition();
 
             while (true)
             {
@@ -242,28 +62,35 @@
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        MoveFirstPlayerUp();
+                        Player.MoveFirstPlayerUp();
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        MoveFirstPlayerDown();
+                        Player.MoveFirstPlayerDown();
                     }
                 }
                 // move second player
-                MoveSecondPlayerBot();
+                Player.MoveSecondPlayerBot();
+
                 // move ball
-                MoveBall();
+                Ball.MoveBall();
+
                 // redraw all
                 // - clear all
                 Console.Clear();
+
                 // - draw first player
-                DrawFirstPlayer();
+                Player.DrawFirstPlayer();
+
                 // - draw second player
-                DrawSecondPlayer();
+                Player.DrawSecondPlayer();
+
                 // - draw ball
-                DrawBall();
+                Ball.DrawBall();
+
                 // - print result
-                PrintResult();
+                PrintElements.PrintResult();
+
                 //------
                 Thread.Sleep(50);
             }

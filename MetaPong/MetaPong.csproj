@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PongElements\Ball.cs" />
+    <Compile Include="PongElements\Player.cs" />
+    <Compile Include="PongElements\PrintElements.cs" />
+    <Compile Include="PongElements\SetPosition.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
