@@ -1,6 +1,8 @@
 ﻿namespace MetaPong
 {
     using PongElements;
+    using PongElements.DrawElements;
+    using PongElements.ElementsMovement;
     using System;
     using System.Threading;
     using Utilities.ScreenElements;
@@ -62,18 +64,18 @@
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        Player.MoveFirstPlayerUp();
+                        PlayerMovement.MoveFirstPlayerUp();
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        Player.MoveFirstPlayerDown();
+                        PlayerMovement.MoveFirstPlayerDown();
                     }
                 }
                 // move second player
-                Player.MoveSecondPlayerBot();
+                PlayerMovement.MoveSecondPlayerBot();
 
                 // move ball
-                Ball.MoveBall();
+                BallMovement.MoveBall();
 
                 // redraw all
                 // - clear all
@@ -89,7 +91,7 @@
                 Ball.DrawBall();
 
                 // - print result
-                PrintElements.PrintResult();
+                PrintResults.PrintResult();
 
                 //------
                 Thread.Sleep(50);

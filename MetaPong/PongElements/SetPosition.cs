@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MetaPong.PongElements
 {
+    using MetaPong.PongElements.DrawElements;
+    using System;
+
     public class SetPosition
     {
         public static void SetInitialPosition()

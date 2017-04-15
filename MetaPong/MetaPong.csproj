@@ -42,9 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PongElements\Ball.cs" />
-    <Compile Include="PongElements\Player.cs" />
-    <Compile Include="PongElements\PrintElements.cs" />
+    <Compile Include="PongElements\DrawElements\Ball.cs" />
+    <Compile Include="PongElements\DrawElements\Player.cs" />
+    <Compile Include="PongElements\ElementsMovement\BallMovement.cs" />
+    <Compile Include="PongElements\ElementsMovement\PlayerMovement.cs" />
+    <Compile Include="PongElements\PrintElements\PrintPosition.cs" />
+    <Compile Include="PongElements\PrintElements\PrintResults.cs" />
     <Compile Include="PongElements\SetPosition.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,5 +61,6 @@
       <Name>MetaPong.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
