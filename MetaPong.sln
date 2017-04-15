@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.NUnit.Tests", "Met
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C61490F3-3368-4F8E-90B4-069955C4D56B}"
 	ProjectSection(SolutionItems) = preProject
-		..\_01_Test\_01_Test1\Images\software-university-logo.jpg = ..\_01_Test\_01_Test1\Images\software-university-logo.jpg
+		Images\software-university-logo.jpg = Images\software-university-logo.jpg
 	EndProjectSection
 EndProject
 Global

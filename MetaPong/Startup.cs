@@ -204,8 +204,8 @@
         private static void RunInterfaceDemo()
         {
             // Setup screen
-            int windowWidth = Console.LargestWindowWidth - 5;
-            int windowHeight = Console.LargestWindowHeight - 5;
+            int windowWidth = Console.LargestWindowWidth - 15;
+            int windowHeight = Console.LargestWindowHeight - 10;
 
 
             Console.BufferWidth = windowWidth;
@@ -231,6 +231,11 @@
             int ballHeight = random.Next(1, windowWidth - ballSize);
             ScreenLayout ball = Composer.GetBox(2, 2, ballRow, ballHeight);
 
+            RenderLogo(2, startColumn-5);
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
             optionsScreen.Add(menuFrame);
             optionsScreen.Add(playerOne);
             optionsScreen.Add(playerTwo);
@@ -243,8 +248,6 @@
             optionsScreen.Add(new ScreenLabel(startRow + 5, startColumn, "EXIT"));
             optionsScreen.Add(new ScreenLabel(0, startColumn+4, $"{random.Next(0,10)}-{random.Next(0,10)}"));
 
-            RenderLogo();
-
             Console.CursorVisible = false;
 
             optionsScreen.Print();
@@ -252,15 +255,15 @@
             Console.ReadKey(true);
         }
 
-        static void RenderLogo()
+        static void RenderLogo(int startRow, int startColumn)
         {
             string imageFile = "../../../Images/software-university-logo.jpg";
             var screen = new TerminalScreen();
 
-            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 25));
+            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 10));
 
             // Create a window at position (5,5) on the screen, with size 50x50
-            var window = screen.CreateNewWindow(new Region(50, 2, 20, 25));
+            var window = screen.CreateNewWindow(new Region(startColumn, startRow, 20, 10));
 
             // Set a source buffer in the window, big enough to hold the image
             // We want to focus on the region of the window at point (7, 4), where the size is
@@ -272,8 +275,6 @@
             // including the window's buffer
             image.RenderTo(window.SourceBuffer);
             screen.Render(includeWindows: true);
-
-            Console.ReadKey(true);
         }
 
         static void Main(string[] args)
