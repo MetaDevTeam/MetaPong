@@ -5,6 +5,8 @@
     using CmdArt;
     using CmdArt.Screen;
     using Utilities;
+    using Utilities.Enumeration;
+    using Utilities.Input;
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
 
@@ -258,7 +260,25 @@
             optionsScreen.Print();
             optionsMenu.Print();
 
-            Console.ReadKey(true);
+            while (true)
+            {
+                // Keayboard funtionality
+                var keyInput = new KeyboardInput();
+                var command = keyInput.Listen();
+                switch (command)
+                {
+                    case Command.MoveUp:
+                        optionsMenu.MoveUp();
+                        optionsMenu.Print();
+                        break;
+                    case Command.MoveDown:
+                        optionsMenu.MoveDown();
+                        optionsMenu.Print();
+                        break;
+                    case Command.Execute:
+                        break;
+                }
+            }
         }
 
         static void RenderLogo(int startRow, int startColumn)
@@ -287,7 +307,6 @@
         {
             RunInterfaceDemo();
 
-            RemoveScrollBars();
             SetInitialPosition();
 
             while (true)
@@ -321,7 +340,7 @@
                 // - print result
                 PrintResult();
                 //------
-                Thread.Sleep(50);
+                Thread.Sleep(10);
             }
         }
     }

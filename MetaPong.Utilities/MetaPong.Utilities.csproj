@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Composer.Chars.cs" />
     <Compile Include="Composer.cs" />
+    <Compile Include="Enumeration\Command.cs" />
+    <Compile Include="Enumeration\UserResponse.cs" />
+    <Compile Include="Input\KeyboardInput.cs" />
     <Compile Include="ScreenElements\Composit\Menu.cs" />
     <Compile Include="ScreenElements\Composit\ScreenGroup.cs" />
     <Compile Include="ScreenElements\Label.cs" />

@@ -28,7 +28,7 @@
 
         public void MoveDown()
         {
-            if (_selected < _elements.Count - 1)
+            if (_selected < Elements.Count - 1)
             {
                 _selected++;
             }
@@ -36,7 +36,7 @@
 
         public Label GetSelected()
         {
-            return _elements[_selected];
+            return (Label)Elements[_selected];
         }
 
         /// <summary>
