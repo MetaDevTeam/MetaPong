@@ -45,8 +45,9 @@
   <ItemGroup>
     <Compile Include="Composer.Chars.cs" />
     <Compile Include="Composer.cs" />
-    <Compile Include="ScreenElements\ScreenGroup.cs" />
-    <Compile Include="ScreenElements\ScreenLabel.cs" />
+    <Compile Include="ScreenElements\Composit\Menu.cs" />
+    <Compile Include="ScreenElements\Composit\ScreenGroup.cs" />
+    <Compile Include="ScreenElements\Label.cs" />
     <Compile Include="ScreenElements\ScreenElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenElements\ScreenLayout.cs" />
@@ -55,5 +56,6 @@
     <None Include="packages.config" />
     <None Include="ScreenElements\ScreenElements.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

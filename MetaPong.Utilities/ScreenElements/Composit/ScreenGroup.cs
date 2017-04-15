@@ -1,22 +1,21 @@
-﻿namespace MetaPong.Utilities.ScreenElements
+﻿namespace MetaPong.Utilities.ScreenElements.Composit
 {
     using System.Collections.Generic;
 
-
     /// <summary>
-    /// A group of scree elements that should be displayed together.
+    /// A group of scree elements that should be displayed or act together.
     /// Add the elements with the Add() method.
     /// </summary>
     public class ScreenGroup
     {
-        private List<ScreenElement> _elements;
+        protected List<ScreenElement> _elements;
 
         public ScreenGroup()
         {
             Elements = new List<ScreenElement>();
         }
 
-        public List<ScreenElement> Elements
+        protected List<ScreenElement> Elements
         {
             get { return _elements; }
             set { _elements = value; }

@@ -6,6 +6,7 @@
     using CmdArt.Screen;
     using Utilities;
     using Utilities.ScreenElements;
+    using Utilities.ScreenElements.Composit;
 
     class Startup
     {
@@ -214,6 +215,7 @@
             Console.WindowHeight = windowHeight;
 
             var optionsScreen = new ScreenGroup();
+            var optionsMenu = new Menu();
 
             int startColumn = (windowWidth / 2) - 5;
             int startRow = (windowHeight / 2) - 3;
@@ -236,21 +238,25 @@
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
+            // Add the decoration items to the screen
             optionsScreen.Add(menuFrame);
             optionsScreen.Add(playerOne);
             optionsScreen.Add(playerTwo);
             optionsScreen.Add(ball);
-            optionsScreen.Add(new ScreenLabel(startRow, startColumn, "1 PLAYER"));
-            optionsScreen.Add(new ScreenLabel(startRow + 1, startColumn, "2 PLAYERS"));
-            optionsScreen.Add(new ScreenLabel(startRow + 2, startColumn, "OPTIONS"));
-            optionsScreen.Add(new ScreenLabel(startRow + 3, startColumn, "SAVE GAME"));
-            optionsScreen.Add(new ScreenLabel(startRow + 4, startColumn, "LOAD GAME"));
-            optionsScreen.Add(new ScreenLabel(startRow + 5, startColumn, "EXIT"));
-            optionsScreen.Add(new ScreenLabel(0, startColumn+4, $"{random.Next(0,10)}-{random.Next(0,10)}"));
+            optionsScreen.Add(new Label(0, startColumn + 4, $"{random.Next(0, 10)}-{random.Next(0, 10)}"));
+
+            // Construct the menu
+            optionsMenu.Add(new Label(startRow, startColumn, "1 PLAYER"));
+            optionsMenu.Add(new Label(startRow + 1, startColumn, "2 PLAYERS"));
+            optionsMenu.Add(new Label(startRow + 2, startColumn, "OPTIONS"));
+            optionsMenu.Add(new Label(startRow + 3, startColumn, "SAVE GAME"));
+            optionsMenu.Add(new Label(startRow + 4, startColumn, "LOAD GAME"));
+            optionsMenu.Add(new Label(startRow + 5, startColumn, "EXIT"));
 
             Console.CursorVisible = false;
 
             optionsScreen.Print();
+            optionsMenu.Print();
 
             Console.ReadKey(true);
         }

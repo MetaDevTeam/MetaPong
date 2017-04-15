@@ -7,18 +7,18 @@
       <FileName>ScreenElements\ScreenElement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.ScreenElements.ScreenGroup">
+  <Class Name="MetaPong.Utilities.ScreenElements.Composit.ScreenGroup">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
-      <FileName>ScreenElements\ScreenGroup.cs</FileName>
+      <FileName>ScreenElements\Composit\ScreenGroup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.ScreenElements.ScreenLabel">
+  <Class Name="MetaPong.Utilities.ScreenElements.Label">
     <Position X="3.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
-      <FileName>ScreenElements\ScreenLabel.cs</FileName>
+      <FileName>ScreenElements\Label.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MetaPong.Utilities.ScreenElements.ScreenLayout">
