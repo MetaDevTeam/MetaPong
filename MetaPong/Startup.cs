@@ -4,7 +4,6 @@
     using PongElements.DrawElements;
     using PongElements.ElementsMovement;
     using System;
-    using System.ComponentModel.Design;
     using System.Threading;
     using CmdArt;
     using CmdArt.Screen;
@@ -46,6 +45,7 @@
             int startRow = (windowHeight / 2) - 3;
 
             // player decorations
+            Random random = new Random();
             int playerHeight = 8;
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
@@ -127,7 +127,7 @@
 
         private static void RunPong(int speed)
         {
-            SetInitialPosition();
+            SetPosition.SetInitialPosition();
 
             while (true)
             {
