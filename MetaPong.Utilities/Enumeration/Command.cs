@@ -12,6 +12,12 @@
         Unknown,
         MoveUp,
         MoveDown,
-        Execute
+        Execute,
+        OnePlayer,
+        TwoPlayers,
+        Options,
+        Save,
+        Load,
+        Exit
     }
 }

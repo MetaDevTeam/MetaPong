@@ -2,19 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Enumeration;
 
 
     public class Menu : ScreenGroup
     {
-        private new readonly List<Label> _elements;
         private int _selected;
 
-        public void Add(int x, int y, string content)
+        public void Add(int x, int y, string content, Command command)
         {
-            var item = new Label(x, y, content);
+            var item = new MenuItem(x, y, content, command);
             _elements.Add(item);
         }
 
@@ -34,15 +31,15 @@
             }
         }
 
-        public Label GetSelected()
+        public MenuItem GetSelected()
         {
-            return (Label)Elements[_selected];
+            return (MenuItem)Elements[_selected];
         }
 
         /// <summary>
         /// Prints the setr of elements on the screen.
         /// </summary>
-        public void Print()
+        public override void Print()
         {
             for (int i = 0; i < Elements.Count; i++)
             {

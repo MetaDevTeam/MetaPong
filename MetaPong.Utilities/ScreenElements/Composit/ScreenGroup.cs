@@ -6,13 +6,18 @@
     /// A group of scree elements that should be displayed or act together.
     /// Add the elements with the Add() method.
     /// </summary>
-    public class ScreenGroup
+    public abstract class ScreenGroup
     {
         protected List<ScreenElement> _elements;
 
-        public ScreenGroup()
+        protected ScreenGroup()
         {
             Elements = new List<ScreenElement>();
+        }
+
+        protected ScreenGroup(List<ScreenElement> elements)
+        {
+            Elements = elements;
         }
 
         protected List<ScreenElement> Elements
@@ -26,15 +31,6 @@
             _elements.Add(element);
         }
 
-        /// <summary>
-        /// Prints the setr of elements on the screen.
-        /// </summary>
-        public void Print()
-        {
-            foreach (var element in Elements)
-            {
-                element.Print();
-            }
-        }
+        public abstract void Print();
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace MetaPong
 {
     using System;
+    using System.ComponentModel.Design;
     using System.Threading;
     using CmdArt;
     using CmdArt.Screen;
@@ -210,22 +211,26 @@
             int windowWidth = Console.LargestWindowWidth - 15;
             int windowHeight = Console.LargestWindowHeight - 10;
 
-
             Console.BufferWidth = windowWidth;
             Console.BufferHeight = windowHeight;
             Console.WindowWidth = windowWidth;
             Console.WindowHeight = windowHeight;
 
-            var optionsScreen = new ScreenGroup();
-            var optionsMenu = new Menu();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
 
+            // Create element containers
+            var homeDecoration = new ScreenDecoration();
+            var homeMenu = new Menu();
+
+            // Set layout rows and columns
             int startColumn = (windowWidth / 2) - 5;
             int startRow = (windowHeight / 2) - 3;
+
+            // player decorations
             int playerHeight = 8;
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
-
-            ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
             ScreenLayout playerOne = Composer.GetBox(2, playerHeight, player1Row, 0);
             ScreenLayout playerTwo = Composer.GetBox(2, playerHeight, player2Row, windowWidth-2);
 
@@ -235,30 +240,34 @@
             int ballHeight = random.Next(1, windowWidth - ballSize);
             ScreenLayout ball = Composer.GetBox(2, 2, ballRow, ballHeight);
 
-            RenderLogo(2, startColumn-5);
+            // Menu frame
+            ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
 
+            // Remder Logo
+            RenderLogo(2, startColumn-5);
+            // reset colors after logo
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
             // Add the decoration items to the screen
-            optionsScreen.Add(menuFrame);
-            optionsScreen.Add(playerOne);
-            optionsScreen.Add(playerTwo);
-            optionsScreen.Add(ball);
-            optionsScreen.Add(new Label(0, startColumn + 4, $"{random.Next(0, 10)}-{random.Next(0, 10)}"));
+            homeDecoration.Add(menuFrame);
+            homeDecoration.Add(playerOne);
+            homeDecoration.Add(playerTwo);
+            homeDecoration.Add(ball);
+            homeDecoration.Add(new Label(0, startColumn + 4, $"{random.Next(0, 10)}-{random.Next(0, 10)}"));
 
             // Construct the menu
-            optionsMenu.Add(new Label(startRow, startColumn, "1 PLAYER"));
-            optionsMenu.Add(new Label(startRow + 1, startColumn, "2 PLAYERS"));
-            optionsMenu.Add(new Label(startRow + 2, startColumn, "OPTIONS"));
-            optionsMenu.Add(new Label(startRow + 3, startColumn, "SAVE GAME"));
-            optionsMenu.Add(new Label(startRow + 4, startColumn, "LOAD GAME"));
-            optionsMenu.Add(new Label(startRow + 5, startColumn, "EXIT"));
+            homeMenu.Add(new MenuItem(startRow, startColumn, "1 PLAYER", Command.OnePlayer));
+            homeMenu.Add(new MenuItem(startRow + 1, startColumn, "2 PLAYERS", Command.TwoPlayers));
+            homeMenu.Add(new MenuItem(startRow + 2, startColumn, "OPTIONS", Command.Options));
+            homeMenu.Add(new MenuItem(startRow + 3, startColumn, "SAVE GAME", Command.Save));
+            homeMenu.Add(new MenuItem(startRow + 4, startColumn, "LOAD GAME", Command.Load));
+            homeMenu.Add(new MenuItem(startRow + 5, startColumn, "EXIT", Command.Exit));
 
             Console.CursorVisible = false;
 
-            optionsScreen.Print();
-            optionsMenu.Print();
+            homeDecoration.Print();
+            homeMenu.Print();
 
             while (true)
             {
@@ -268,45 +277,38 @@
                 switch (command)
                 {
                     case Command.MoveUp:
-                        optionsMenu.MoveUp();
-                        optionsMenu.Print();
+                        homeMenu.MoveUp();
+                        homeMenu.Print();
                         break;
                     case Command.MoveDown:
-                        optionsMenu.MoveDown();
-                        optionsMenu.Print();
+                        homeMenu.MoveDown();
+                        homeMenu.Print();
                         break;
                     case Command.Execute:
+                        Command menuCommand = (homeMenu.GetSelected()).Command;
+                        ParseMenuCommand(menuCommand);
                         break;
                 }
             }
         }
 
-        static void RenderLogo(int startRow, int startColumn)
+        static void ParseMenuCommand(Command command)
         {
-            string imageFile = "../../../Images/software-university-logo.jpg";
-            var screen = new TerminalScreen();
-
-            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 10));
-
-            // Create a window at position (5,5) on the screen, with size 50x50
-            var window = screen.CreateNewWindow(new Region(startColumn, startRow, 20, 10));
-
-            // Set a source buffer in the window, big enough to hold the image
-            // We want to focus on the region of the window at point (7, 4), where the size is
-            // still 20x16
-            var buffer = screen.BufferFactory.Create(image.Size);
-            window.SetSourceBuffer(buffer, new Location(0, 0));
-
-            // Render the image to the Window's buffer, then render the screen to the Console
-            // including the window's buffer
-            image.RenderTo(window.SourceBuffer);
-            screen.Render(includeWindows: true);
+            switch (command)
+            {
+                case Command.OnePlayer:
+                    RunPong(25);
+                    break;
+                case Command.Exit:
+                    Console.Clear();
+                    Console.WriteLine("Exit successful!");
+                    Environment.Exit(0);
+                    break;
+            }
         }
 
-        static void Main(string[] args)
+        private static void RunPong(int speed)
         {
-            RunInterfaceDemo();
-
             SetInitialPosition();
 
             while (true)
@@ -340,8 +342,37 @@
                 // - print result
                 PrintResult();
                 //------
-                Thread.Sleep(10);
+                Thread.Sleep(speed);
             }
+        }
+
+        static void RenderLogo(int startRow, int startColumn)
+        {
+            string imageFile = "../../../Images/software-university-logo.jpg";
+            var screen = new TerminalScreen();
+
+            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 10));
+
+            // Create a window at position (5,5) on the screen, with size 50x50
+            var window = screen.CreateNewWindow(new Region(startColumn, startRow, 20, 10));
+
+            // Set a source buffer in the window, big enough to hold the image
+            // We want to focus on the region of the window at point (7, 4), where the size is
+            // still 20x16
+            var buffer = screen.BufferFactory.Create(image.Size);
+            window.SetSourceBuffer(buffer, new Location(0, 0));
+
+            // Render the image to the Window's buffer, then render the screen to the Console
+            // including the window's buffer
+            image.RenderTo(window.SourceBuffer);
+            screen.Render(includeWindows: true);
+        }
+
+        static void Main(string[] args)
+        {
+            RunInterfaceDemo();
+
+            RunPong(25);
         }
     }
 }

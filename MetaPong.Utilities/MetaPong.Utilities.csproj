@@ -45,12 +45,14 @@
   <ItemGroup>
     <Compile Include="Composer.Chars.cs" />
     <Compile Include="Composer.cs" />
+    <Compile Include="ScreenElements\Composit\ScreenDecoration.cs" />
     <Compile Include="Enumeration\Command.cs" />
     <Compile Include="Enumeration\UserResponse.cs" />
     <Compile Include="Input\KeyboardInput.cs" />
     <Compile Include="ScreenElements\Composit\Menu.cs" />
     <Compile Include="ScreenElements\Composit\ScreenGroup.cs" />
     <Compile Include="ScreenElements\Label.cs" />
+    <Compile Include="ScreenElements\MenuItem.cs" />
     <Compile Include="ScreenElements\ScreenElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenElements\ScreenLayout.cs" />
