@@ -1,8 +1,9 @@
 ﻿
 namespace MetaPong.PongElements.ElementsMovement
 {
-    using MetaPong.PongElements.DrawElements;
+    using DrawElements;
     using System;
+    using PrintElements;
 
     public class BallMovement
     {

@@ -6,8 +6,8 @@
     using PongElements.DrawElements;
     using PongElements.ElementsMovement;
     using System;
-    using System.Security.Policy;
     using System.Threading;
+    using PongElements.PrintElements;
     using Utilities;
     using Utilities.Enumeration;
     using Utilities.Input;
@@ -16,18 +16,17 @@
 
     class Startup
     {
-        //static void RemoveScrollBars()
-        //{
-        //    Console.BufferHeight = Console.WindowHeight;
-        //    Console.BufferWidth = Console.WindowWidth;
-        //
-        //}
+        // General game constants
+        private const int ScreenWidth = 130;
+        private const int ScreenHeight = 40;
+        private const int MaxPoints = 2;
+        private const int Speed = 50;
 
-        private static void RunInterfaceDemo()
+        private static void HomeScreen(int width, int height)
         {
             // Setup screen
-            int windowWidth = Console.LargestWindowWidth - 15;
-            int windowHeight = Console.LargestWindowHeight - 10;
+            int windowWidth = width; //Console.LargestWindowWidth; or 130
+            int windowHeight = height; //Console.LargestWindowHeight; or 40
 
             Console.BufferWidth = windowWidth;
             Console.BufferHeight = windowHeight;
@@ -36,6 +35,7 @@
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
 
             // Create element containers
             var homeDecoration = new ScreenDecoration();
@@ -63,7 +63,8 @@
             ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
 
             // Remder Logo
-            RenderLogo(2, startColumn-5);
+            RenderLogo(2, startColumn-25);
+
             // reset colors after logo
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
@@ -116,7 +117,7 @@
             switch (command)
             {
                 case Command.OnePlayer:
-                    RunPong(25);
+                    RunPong(Speed,MaxPoints);
                     break;
                 case Command.Exit:
                     Console.Clear();
@@ -126,7 +127,7 @@
             }
         }
 
-        private static void RunPong(int speed)
+        private static void RunPong(int speed, int maxPoints)
         {
             SetPosition.SetInitialPosition();
 
@@ -167,20 +168,30 @@
                 // - print result
                 PrintResults.PrintResult();
 
+                if (PrintResults.firstPlayerResults == maxPoints 
+                    || PrintResults.secondPlayerResults == maxPoints
+                    )
+                {
+                    PrintResults.firstPlayerResults = 0;
+                    PrintResults.secondPlayerResults = 0;
+                    break;
+                }
                 //------
                 Thread.Sleep(speed);
             }
+
+            HomeScreen(ScreenWidth,ScreenHeight);
         }
 
         static void RenderLogo(int startRow, int startColumn)
         {
-            string imageFile = "../../../Images/software-university-logo.jpg";
+            string imageFile = "../../../Images/Code-Wizard.png";
             var screen = new TerminalScreen();
 
-            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(20, 10));
+            var image = CmdArt.Images.Image.BuildFromImageFile(imageFile, new Size(62, 35));
 
             // Create a window at position (5,5) on the screen, with size 50x50
-            var window = screen.CreateNewWindow(new Region(startColumn, startRow, 20, 10));
+            var window = screen.CreateNewWindow(new Region(startColumn, startRow, 62, 35));
 
             // Set a source buffer in the window, big enough to hold the image
             // We want to focus on the region of the window at point (7, 4), where the size is
@@ -194,11 +205,11 @@
             screen.Render(includeWindows: true);
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
-            RunInterfaceDemo();
+            HomeScreen(ScreenWidth,ScreenHeight);
 
-            RunPong(25);
+            RunPong(Speed,MaxPoints);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong", "MetaPong\MetaPong.csproj", "{2A968462-231D-42BB-A706-484694B7AC76}"
 EndProject
@@ -17,6 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.NUnit.Tests", "Met
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C61490F3-3368-4F8E-90B4-069955C4D56B}"
 	ProjectSection(SolutionItems) = preProject
+		Images\Code-Wizard.png = Images\Code-Wizard.png
 		Images\software-university-logo.jpg = Images\software-university-logo.jpg
 	EndProjectSection
 EndProject

@@ -62,6 +62,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="PongElements\PongOOP.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MetaPong.Utilities\MetaPong.Utilities.csproj">
