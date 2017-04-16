@@ -1,12 +1,13 @@
 ﻿namespace MetaPong
 {
+    using CmdArt;
+    using CmdArt.Screen;
     using PongElements;
     using PongElements.DrawElements;
     using PongElements.ElementsMovement;
     using System;
+    using System.Security.Policy;
     using System.Threading;
-    using CmdArt;
-    using CmdArt.Screen;
     using Utilities;
     using Utilities.Enumeration;
     using Utilities.Input;

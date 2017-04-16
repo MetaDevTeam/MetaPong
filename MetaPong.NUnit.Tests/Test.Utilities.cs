@@ -1,7 +1,6 @@
-﻿using NUnit.Framework;
-
-namespace MetaPong.NUnit.Tests
+﻿namespace MetaPong.NUnit.Tests
 {
+    using global::NUnit.Framework;
     using Utilities;
 
     [TestFixture]

@@ -2,6 +2,7 @@
 namespace MetaPong.PongElements
 {
     using System;
+    using Utilities;
 
     public class Player
     {
@@ -14,8 +15,8 @@ namespace MetaPong.PongElements
         {
             for (int y = firstPlayerPosition; y < firstPlayerPosition + firstPlayerPadSize; y++)
             {
-                PrintPosition.PrintAtPosition(0, y, '[');
-                PrintPosition.PrintAtPosition(1, y, ']');
+                PrintPosition.PrintAtPosition(0, y, '║');
+                PrintPosition.PrintAtPosition(1, y, '║');
             }
         }
 
@@ -23,8 +24,8 @@ namespace MetaPong.PongElements
         {
             for (int y = secondPlayerPosition; y < secondPlayerPosition + secondPlayerPadSize; y++)
             {
-                PrintPosition.PrintAtPosition(Console.WindowWidth - 1, y, ']');
-                PrintPosition.PrintAtPosition(Console.WindowWidth - 2, y, '[');
+                PrintPosition.PrintAtPosition(Console.WindowWidth - 1, y, '║');
+                PrintPosition.PrintAtPosition(Console.WindowWidth - 2, y, '║');
             }
         }
     }
