@@ -10,7 +10,7 @@
         public void ComposerRegularUpper()
         {
             string boxUpper = "╔═══╗";
-            var box = Composer.MakeBoxLayout(5, 1);
+            var box = Composer.MakeBoxLayout(5, 2);
             var rows = Composer.Compose(box);
             // Assert that composer returns a propper element
             Assert.AreEqual(boxUpper,rows[0],"The UPPER size of the box is not correct. Check Composer.MakeBoxLayout method!");
@@ -19,11 +19,11 @@
         [Test, Property("Priority", 1)]
         public void ComposerRegularLower()
         {
-            string boxUpper = "╚═══╝";
+            string boxLower = "╚═══╝";
             var box = Composer.MakeBoxLayout(5, 2);
             var rows = Composer.Compose(box);
             // Assert that composer returns a propper element
-            Assert.AreEqual(boxUpper, rows[1], "The LOWER size of the box is not correct. Check Composer.MakeBoxLayout method!");
+            Assert.AreEqual(boxLower, rows[1], "The LOWER size of the box is not correct. Check Composer.MakeBoxLayout method!");
         }
     }
 }
