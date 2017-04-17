@@ -1,7 +1,6 @@
 ﻿namespace MetaPong.Utilities.ScreenElements.Composit
 {
     using System;
-    using System.Collections.Generic;
     using Enumeration;
 
 

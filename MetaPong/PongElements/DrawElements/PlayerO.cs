@@ -5,7 +5,7 @@
     using Utilities.ScreenElements;
 
 
-    public class PlayerO: ScreenElement
+    public class PlayerO: ScreenLayout
     {
         private const int Thickness = 2;
         private const int Height = 8;
@@ -14,17 +14,19 @@
         //TODO organize it OOP way in an object
         private const int ScreenHeight = 40;
 
-        private ScreenLayout _layout;
-
         public PlayerO(int row, int column, string side) : base(row, column)
         {
-            _layout = Composer.GetBox(Thickness, Height, row, GetSide(side));
+            Column = column;
+            Row = row;
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness, Height));
             _changed = true;
         }
 
         public PlayerO(int row, string side) : base(row)
         {
-            _layout = Composer.GetBox(Thickness, Height, row, GetSide(side));
+            Column = GetSide(side);
+            Row = row;
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness,Height));
             _changed = true;
         }
 
@@ -41,19 +43,27 @@
 
         public void MoveUp()
         {
-            if (_layout.Row > 0)
+            if (Row > 0)
             {
-                _layout.Row -= 1;
+                Row -= 1;
                 _changed = true;
             }
         }
 
         public void MoveDown()
         {
-            if (_layout.Row < ScreenHeight - Height)
+            if (Row < ScreenHeight - Height)
             {
-                _layout.Row += 1;
+                Row += 1;
                 _changed = true;
+            }
+        }
+
+        public override void Hide()
+        {
+            if (_changed)
+            {
+                base.Hide();
             }
         }
 
@@ -61,7 +71,7 @@
         {
             if (_changed)
             {
-                _layout.Print();
+                base.Print();
                 _changed = false;
             }
             

@@ -58,7 +58,7 @@
             int ballSize = 2;
             int ballRow = random.Next(1,windowHeight - ballSize);
             int ballHeight = random.Next(1, windowWidth - ballSize);
-            ScreenLayout ball = Composer.GetBox(2, 2, ballRow, ballHeight);
+            BallO ball = new BallO(ballRow, ballHeight, ballSize);
 
             // Menu frame
             ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
@@ -132,9 +132,15 @@
 
             var playerOne = new PlayerO(ScreenHeight/2 - 4,"Left");
             var playerTwo = new PlayerBot(ScreenHeight/2 - 4,"Right", 60);
+            var ball = new BallO(ScreenHeight / 2 - 1,ScreenWidth/2-1,2);
 
             while (true)
             {
+                //Hide moving elements
+                ball.Hide();
+                playerOne.Hide();
+                playerTwo.Hide();
+                
                 // move first player
                 if (Console.KeyAvailable)
                 {
@@ -149,14 +155,10 @@
                     }
                 }
                 // move second player
-                playerTwo.Tick();
+                playerTwo.Tick(ball);
 
                 // move ball
-                BallMovement.MoveBall();
-
-                // redraw all
-                // - clear all
-                Console.Clear();
+                ball.Tick();
 
                 // - draw first player
                 playerOne.Print();
@@ -165,7 +167,7 @@
                 playerTwo.Print();
 
                 // - draw ball
-                Ball.DrawBall();
+                ball.Print();
 
                 // - print result
                 PrintResults.PrintResult();

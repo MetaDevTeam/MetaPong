@@ -35,13 +35,13 @@
             }
         }
 
-        public void Tick()
+        public void Tick(BallO ball)
         {
             int randomNum = _random.Next(1, 101);
 
             if (randomNum <= _accuracy)
             {
-                if (BallMovement.ballDirectionUp)
+                if (ball.Up)
                 {
                     MoveUp();
                 }
