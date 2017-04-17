@@ -2,14 +2,21 @@
 {
     public abstract class ScreenElement
     {
-        protected readonly int Column;
-        protected readonly int Row;
+        public int Column;
+        public int Row;
 
         protected ScreenElement(int row, int column)
         {
             Column = column;
             Row = row;
         }
+
+        protected ScreenElement(int row)
+        {
+            Column = 0;
+            Row = row;
+        }
+
 
         public abstract void Print();
     }

@@ -24,16 +24,12 @@
             foreach (string line in _layout)
             {
                 int colAfter = Console.CursorLeft + line.Length;
-                if (colAfter >= Console.WindowWidth)
+                int cursorTop = Console.CursorTop;
+                Console.Write(line);
+                Console.CursorLeft = Column;
+                if (colAfter < Console.WindowWidth && Console.CursorTop < Console.BufferHeight-1)
                 {
-                    Console.Write(line);
-                    Console.CursorLeft = Column;
-                }
-                else
-                {
-                    Console.Write(line);
-                    Console.CursorLeft -= line.Length;
-                    Console.CursorTop++; 
+                    Console.CursorTop++;
                 }
                 
             }

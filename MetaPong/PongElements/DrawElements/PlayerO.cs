@@ -5,18 +5,27 @@
     using Utilities.ScreenElements;
 
 
-    public class PlayerO
+    public class PlayerO: ScreenElement
     {
         private const int Thickness = 2;
         private const int Height = 8;
-        private int _row = 0;
+        private bool _changed;
+        
+        //TODO organize it OOP way in an object
+        private const int ScreenHeight = 40;
 
         private ScreenLayout _layout;
 
-        public PlayerO(int row, int size, string side)
+        public PlayerO(int row, int column, string side) : base(row, column)
         {
-            _row = row;
-            _layout = Composer.GetBox(Thickness, Height, _row, GetSide(side));
+            _layout = Composer.GetBox(Thickness, Height, row, GetSide(side));
+            _changed = true;
+        }
+
+        public PlayerO(int row, string side) : base(row)
+        {
+            _layout = Composer.GetBox(Thickness, Height, row, GetSide(side));
+            _changed = true;
         }
 
         private int GetSide(string side)
@@ -30,9 +39,32 @@
             }
         }
 
-        public void Print()
+        public void MoveUp()
         {
-            _layout.Print();
+            if (_layout.Row > 0)
+            {
+                _layout.Row -= 1;
+                _changed = true;
+            }
+        }
+
+        public void MoveDown()
+        {
+            if (_layout.Row < ScreenHeight - Height)
+            {
+                _layout.Row += 1;
+                _changed = true;
+            }
+        }
+
+        public override void Print()
+        {
+            if (_changed)
+            {
+                _layout.Print();
+                _changed = false;
+            }
+            
         }
     }
 }

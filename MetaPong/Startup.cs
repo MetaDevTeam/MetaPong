@@ -46,12 +46,13 @@
             int startRow = (windowHeight / 2) - 3;
 
             // player decorations
-            Random random = new Random();
+            var random = new Random();
             int playerHeight = 8;
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
-            ScreenLayout playerOne = Composer.GetBox(2, playerHeight, player1Row, 0);
-            ScreenLayout playerTwo = Composer.GetBox(2, playerHeight, player2Row, windowWidth-2);
+
+            var playerOne = new PlayerO(player1Row,"Left");
+            var playerTwo = new PlayerO(player2Row,"Right");
 
             // Ball
             int ballSize = 2;
@@ -64,10 +65,6 @@
 
             // Remder Logo
             RenderLogo(2, startColumn-25);
-
-            // reset colors after logo
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
 
             // Add the decoration items to the screen
             homeDecoration.Add(menuFrame);
@@ -117,6 +114,8 @@
             switch (command)
             {
                 case Command.OnePlayer:
+                    RenderLogo(2, 35);
+                    Thread.Sleep(1000);
                     RunPong(Speed,MaxPoints);
                     break;
                 case Command.Exit:
@@ -131,6 +130,9 @@
         {
             SetPosition.SetInitialPosition();
 
+            var playerOne = new PlayerO(ScreenHeight/2 - 4,"Left");
+            var playerTwo = new PlayerBot(ScreenHeight/2 - 4,"Right", 60);
+
             while (true)
             {
                 // move first player
@@ -139,15 +141,15 @@
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        PlayerMovement.MoveFirstPlayerUp();
+                        playerOne.MoveUp();
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        PlayerMovement.MoveFirstPlayerDown();
+                        playerOne.MoveDown();
                     }
                 }
                 // move second player
-                PlayerMovement.MoveSecondPlayerBot();
+                playerTwo.Tick();
 
                 // move ball
                 BallMovement.MoveBall();
@@ -157,10 +159,10 @@
                 Console.Clear();
 
                 // - draw first player
-                Player.DrawFirstPlayer();
+                playerOne.Print();
 
                 // - draw second player
-                Player.DrawSecondPlayer();
+                playerTwo.Print();
 
                 // - draw ball
                 Ball.DrawBall();
@@ -203,6 +205,10 @@
             // including the window's buffer
             image.RenderTo(window.SourceBuffer);
             screen.Render(includeWindows: true);
+
+            // reset colors after logo
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         static void Main()
