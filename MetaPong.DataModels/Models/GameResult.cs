@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace MetaPong.DataModels.Models
 {
     public class GameResult
@@ -11,6 +13,7 @@ namespace MetaPong.DataModels.Models
 
         public int Id { get; set; }
         
+        [Required]
         public GameResults Result { get; set; }
 
         public int UserId { get; set; }

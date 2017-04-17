@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong", "MetaPong\MetaPong.csproj", "{2A968462-231D-42BB-A706-484694B7AC76}"
 EndProject
@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C61490
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.DataModels", "MetaPong.DataModels\MetaPong.DataModels.csproj", "{394BB8F3-9A3A-4B76-8ABE-D5250A764203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.Data", "MetaPong.Data\MetaPong.Data.csproj", "{771E1353-DB89-48C3-86DB-8B6FE171B0A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771E1353-DB89-48C3-86DB-8B6FE171B0A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771E1353-DB89-48C3-86DB-8B6FE171B0A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771E1353-DB89-48C3-86DB-8B6FE171B0A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771E1353-DB89-48C3-86DB-8B6FE171B0A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
