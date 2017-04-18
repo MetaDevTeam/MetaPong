@@ -29,7 +29,6 @@
             set { _row = value; }
         }
 
-
         public abstract void Print();
     }
 }

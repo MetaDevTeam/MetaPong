@@ -14,7 +14,7 @@
         //TODO organize it OOP way in an object
         private const int ScreenHeight = 40;
 
-        public PlayerO(int row, int column, string side) : base(row, column)
+        public PlayerO(int row, int column) : base(row, column)
         {
             Column = column;
             Row = row;

@@ -5,22 +5,50 @@
     public class ScreenLayout : ScreenElement
     {
         public string[] _layout;
+        protected int _destinationRow;
+        protected int _destinationColumn;
+        protected bool _visible;
 
         public ScreenLayout(int row, int column)
             : base(row, column)
         {
+            _destinationRow = row;
+            _destinationColumn = column;
             _layout = new[] { "" };
+            _visible = false;
         }
 
         public ScreenLayout(int row) : base(row)
         {
             _column = 0;
             _row = row;
+            _destinationRow = row;
+            _destinationColumn = 0;
+            _visible = false;
         }
 
         public void SetLayout(string[] layout)
         {
             _layout = layout;
+        }
+
+        public virtual void Move()
+        {
+            if (_visible && (_destinationRow != _row || _destinationColumn != _column))
+            {
+                Console.MoveBufferArea(
+                    _column,
+                    _row,_layout[0].Length,
+                    _layout.Length,
+                    _destinationColumn,
+                    _destinationRow,
+                    ' ',
+                    ConsoleColor.Black,
+                    ConsoleColor.Black
+                );
+                _destinationRow = _row;
+                _destinationColumn = _column;
+            }
         }
 
         public virtual void Hide()
@@ -45,6 +73,7 @@
                 }
                 
             }
+            _visible = true;
         }
     }
 }

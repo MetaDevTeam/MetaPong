@@ -1,7 +1,6 @@
 ﻿namespace MetaPong.PongElements.DrawElements
 {
     using System;
-    using System.Collections.Generic;
     using Utilities;
     using Utilities.ScreenElements;
 
@@ -17,7 +16,7 @@
             Diameter = diameter;
             Up = true;
             Right = true;
-            _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, diameter));
+            _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, _diameter));
         }
 
         public int Diameter

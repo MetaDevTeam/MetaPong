@@ -134,13 +134,12 @@
             var playerTwo = new PlayerBot(ScreenHeight/2 - 4,"Right", 60);
             var ball = new BallO(ScreenHeight / 2 - 1,ScreenWidth/2-1,2);
 
+            playerOne.Print();
+            playerTwo.Print();
+            ball.Print();
+
             while (true)
             {
-                //Hide moving elements
-                ball.Hide();
-                playerOne.Hide();
-                playerTwo.Hide();
-                
                 // move first player
                 if (Console.KeyAvailable)
                 {
@@ -161,13 +160,13 @@
                 ball.Tick();
 
                 // - draw first player
-                playerOne.Print();
+                playerOne.Move();
 
                 // - draw second player
-                playerTwo.Print();
+                playerTwo.Move();
 
                 // - draw ball
-                ball.Print();
+                ball.Move();
 
                 // - print result
                 PrintResults.PrintResult();
