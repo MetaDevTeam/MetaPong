@@ -15,6 +15,6 @@ namespace MetaPong.Data
         
         public virtual DbSet<User> Users { get; set; }
 
-        public virtual DbSet<GameResult> GameResults { get; set; }
+        public virtual DbSet<Game> Games { get; set; }
     }
 }
