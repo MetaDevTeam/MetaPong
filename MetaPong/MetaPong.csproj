@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,8 +75,16 @@
     <None Include="PongElements\PongOOP.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MetaPong.DataModels\MetaPong.DataModels.csproj">
+      <Project>{394bb8f3-9a3a-4b76-8abe-d5250a764203}</Project>
+      <Name>MetaPong.DataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetaPong.Data\MetaPong.Data.csproj">
+      <Project>{771E1353-DB89-48C3-86DB-8B6FE171B0A8}</Project>
+      <Name>MetaPong.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MetaPong.Utilities\MetaPong.Utilities.csproj">
-      <Project>{B2544DA4-FF42-4210-AEA8-2E7350A30293}</Project>
+      <Project>{b2544da4-ff42-4210-aea8-2e7350a30293}</Project>
       <Name>MetaPong.Utilities</Name>
     </ProjectReference>
   </ItemGroup>

@@ -13,6 +13,7 @@
     using Utilities.Input;
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
+    using Data;
 
     class Startup
     {
@@ -210,6 +211,9 @@
             HomeScreen(ScreenWidth,ScreenHeight);
 
             RunPong(Speed,MaxPoints);
+
+            MetaPongContext context = new MetaPongContext();
+            context.Database.Initialize(true);
         }
     }
 }
