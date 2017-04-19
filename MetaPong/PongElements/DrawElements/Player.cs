@@ -1,32 +1,83 @@
-﻿
-namespace MetaPong.PongElements
+﻿namespace MetaPong.PongElements.DrawElements
 {
-    using System;
     using Utilities;
+    using Utilities.ScreenElements;
 
-    public class Player
+
+    public class Player: MovingElement
     {
-        public static int firstPlayerPadSize = 13;
-        public static int secondPlayerPadSize = 13;
-        public static int firstPlayerPosition = 5;
-        public static int secondPlayerPosition = 5;
+        public int Thickness = 2;
+        public int Height = 8;
+        private bool _changed;
+        internal int _score;
 
-        public static void DrawFirstPlayer()
+        //TODO organize it OOP way in an object
+        private const int ScreenHeight = 40;
+
+        public Player(int row, int column) : base(row, column)
         {
-            for (int y = firstPlayerPosition; y < firstPlayerPosition + firstPlayerPadSize; y++)
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness, Height));
+            _changed = true;
+            _score = 0;
+        }
+
+        public Player(int row, string side) : base(row)
+        {
+            _column = GetSide(side);
+            _columnDestination = _column;
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness,Height));
+            _changed = true;
+            _score = 0;
+        }
+
+        public int Score
+        {
+            get { return _score; }
+            set { _score = value; }
+        }
+
+        private int GetSide(string side)
+        {
+            switch (side)
             {
-                PrintPosition.PrintAtPosition(0, y, '║');
-                PrintPosition.PrintAtPosition(1, y, '║');
+                case "Right":
+                    return 130 - Thickness;
+                default:
+                    return 0;
             }
         }
 
-        public static void DrawSecondPlayer()
+        public void MoveUp()
         {
-            for (int y = secondPlayerPosition; y < secondPlayerPosition + secondPlayerPadSize; y++)
+            if (Row > 0)
             {
-                PrintPosition.PrintAtPosition(Console.WindowWidth - 1, y, '║');
-                PrintPosition.PrintAtPosition(Console.WindowWidth - 2, y, '║');
+                _rowDestination = Row - 1;
+                _changed = true;
             }
+        }
+
+        public void MoveDown()
+        {
+            if (Row < ScreenHeight - Height)
+            {
+                _rowDestination = Row + 1;
+                _changed = true;
+            }
+        }
+
+        public override void Print()
+        {
+            if (_changed)
+            {
+                base.Print();
+                _changed = false;
+            }
+            
+        }
+
+        public virtual void Tick()
+        {
+            _visible = true;
         }
     }
 }

@@ -2,11 +2,10 @@
 {
     using CmdArt;
     using CmdArt.Screen;
-    using PongElements;
     using PongElements.DrawElements;
-    using PongElements.ElementsMovement;
     using System;
     using System.Threading;
+    using PongElements;
     using PongElements.PrintElements;
     using Utilities;
     using Utilities.Enumeration;
@@ -16,15 +15,15 @@
     using Data;
     using Data.ImportData;
 
-    class Startup
+    public class Startup
     {
         // General game constants
-        private const int ScreenWidth = 130;
-        private const int ScreenHeight = 40;
-        private const int MaxPoints = 2;
-        private const int Speed = 50;
+        public const int ScreenWidth = 130;
+        public const int ScreenHeight = 40;
+        public const int MaxPoints = 2;
+        public const int Speed = 50;
 
-        private static void HomeScreen(int width, int height)
+        public static void HomeScreen(int width, int height)
         {
             // Setup screen
             int windowWidth = width; //Console.LargestWindowWidth; or 130
@@ -48,28 +47,25 @@
             int startRow = (windowHeight / 2) - 3;
 
             // player decorations
-            Random random = new Random();
+            var random = new Random();
             int playerHeight = 8;
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
-            ScreenLayout playerOne = Composer.GetBox(2, playerHeight, player1Row, 0);
-            ScreenLayout playerTwo = Composer.GetBox(2, playerHeight, player2Row, windowWidth-2);
+
+            var playerOne = new Player(player1Row,"Left");
+            var playerTwo = new Player(player2Row,"Right");
 
             // Ball
             int ballSize = 2;
             int ballRow = random.Next(1,windowHeight - ballSize);
             int ballHeight = random.Next(1, windowWidth - ballSize);
-            ScreenLayout ball = Composer.GetBox(2, 2, ballRow, ballHeight);
+            Ball ball = new Ball(ballRow, ballHeight, ballSize);
 
             // Menu frame
-            ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
+            MovingElement menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
 
             // Remder Logo
             RenderLogo(2, startColumn-25);
-
-            // reset colors after logo
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
 
             // Add the decoration items to the screen
             homeDecoration.Add(menuFrame);
@@ -108,30 +104,53 @@
                         break;
                     case Command.Execute:
                         Command menuCommand = (homeMenu.GetSelected()).Command;
-                        ParseMenuCommand(menuCommand);
+                        ExecCommand(menuCommand);
                         break;
                 }
             }
         }
 
-        static void ParseMenuCommand(Command command)
+        public static void ExecCommand(Command command)
         {
             switch (command)
             {
                 case Command.OnePlayer:
+                    RenderLogo(2, 35);
+                    Thread.Sleep(1000);
                     RunPong(Speed,MaxPoints);
+                    break;
+                case Command.TwoPlayers:
+                    Console.Clear();
+                    Console.WriteLine("Add Username:");
+                    Console.ReadLine();
+                    HomeScreen(ScreenWidth, ScreenHeight);
                     break;
                 case Command.Exit:
                     Console.Clear();
                     Console.WriteLine("Exit successful!");
                     Environment.Exit(0);
                     break;
+                case Command.HomeScreen:
+                    //end game clear da go to home screen
+                    Console.Clear();
+                    ResetScore();
+                    HomeScreen(ScreenWidth,ScreenHeight);
+
+                    break;
             }
         }
 
-        private static void RunPong(int speed, int maxPoints)
+        public static void RunPong(int speed, int maxPoints)
         {
-            SetPosition.SetInitialPosition();
+            const int verticalMiddle = ScreenHeight / 2;
+            const int playerMiddle = verticalMiddle - 4;
+
+            var playerOne = new Player(playerMiddle,"Left");
+            var playerTwo = new PlayerBot(playerMiddle,"Right", 60);
+
+            var game = new GameController(playerOne,playerTwo);
+
+            game.Load();
 
             while (true)
             {
@@ -141,51 +160,33 @@
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        PlayerMovement.MoveFirstPlayerUp();
+                        game.PlayerOne.MoveUp();
+                        //Console.Beep(40 * 100, 100);
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        PlayerMovement.MoveFirstPlayerDown();
+                        game.PlayerOne.MoveDown();
+                        //Console.Beep(10 * 100, 100);
+                    }
+                    if (keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        ExecCommand(Command.HomeScreen);
                     }
                 }
-                // move second player
-                PlayerMovement.MoveSecondPlayerBot();
-
-                // move ball
-                BallMovement.MoveBall();
-
-                // redraw all
-                // - clear all
-                Console.Clear();
-
-                // - draw first player
-                Player.DrawFirstPlayer();
-
-                // - draw second player
-                Player.DrawSecondPlayer();
-
-                // - draw ball
-                Ball.DrawBall();
-
-                // - print result
-                PrintResults.PrintResult();
-
-                if (PrintResults.firstPlayerResults == maxPoints 
-                    || PrintResults.secondPlayerResults == maxPoints
-                    )
-                {
-                    PrintResults.firstPlayerResults = 0;
-                    PrintResults.secondPlayerResults = 0;
-                    break;
-                }
+                
+                game.Tick();
                 //------
                 Thread.Sleep(speed);
             }
-
-            HomeScreen(ScreenWidth,ScreenHeight);
         }
 
-        static void RenderLogo(int startRow, int startColumn)
+        public static void ResetScore()
+        {
+            PrintResults.firstPlayerResults = 0;
+            PrintResults.secondPlayerResults = 0;
+        }
+
+        public static void RenderLogo(int startRow, int startColumn)
         {
             string imageFile = "../../../Images/Code-Wizard.png";
             var screen = new TerminalScreen();
@@ -205,6 +206,10 @@
             // including the window's buffer
             image.RenderTo(window.SourceBuffer);
             screen.Render(includeWindows: true);
+
+            // reset colors after logo
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         static void Main()

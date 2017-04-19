@@ -17,6 +17,8 @@
                     return Command.MoveDown;
                 case "Enter":
                     return Command.Execute;
+                case "Escape":
+                    return Command.Exit;
                 default:
                     return Command.Unknown;
             }

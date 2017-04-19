@@ -59,14 +59,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PongElements\DrawElements\BallOld.cs" />
     <Compile Include="PongElements\DrawElements\Ball.cs" />
+    <Compile Include="PongElements\DrawElements\PlayerBot.cs" />
+    <Compile Include="PongElements\DrawElements\PlayerOld.cs" />
     <Compile Include="PongElements\DrawElements\Player.cs" />
     <Compile Include="PongElements\ElementsMovement\BallMovement.cs" />
     <Compile Include="PongElements\ElementsMovement\PlayerMovement.cs" />
+    <Compile Include="PongElements\GameController.cs" />
     <Compile Include="PongElements\PrintElements\PrintPosition.cs" />
     <Compile Include="PongElements\PrintElements\PrintResults.cs" />
-    <Compile Include="PongElements\SetPosition.cs" />
-    <Compile Include="PongElements\UserCheck\UserCheckIfExist.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
