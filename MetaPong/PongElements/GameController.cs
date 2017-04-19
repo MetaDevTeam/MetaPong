@@ -62,26 +62,34 @@
 
         private void UpdateScore()
         {
-            if (Ball.Column < 3)
+            if (Ball.Column == 0 && PlayerTwo.Score < MaxScore - 1)
             {
                 PlayerTwo._score += 1;
                 Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
+                Score.Print();
                 DisplayMessage("Player Two scored!");
+                Ball.Reset();
             }
-            else if (Ball.Column > Ball.LastBallCol - PlayerTwo.Thickness)
+            else if (Ball.Column == Ball.LastBallCol && PlayerOne.Score < MaxScore - 1)
             {
                 PlayerOne._score += 1;
                 Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
+                Score.Print();
                 DisplayMessage("Player One scored!");
+                Ball.Reset();
             }
-            if (PlayerOne.Score == MaxScore)
+            else if (Ball.Column == Ball.LastBallCol && PlayerOne.Score == MaxScore-1)
             {
-                new Alert(_verticalMiddle, _horizontalMiddle, "Player One WINS!").Print();
+
+                Score.Print();
+                DisplayMessage("Player One WINS!");
                 ExecCommand(Command.HomeScreen);
             }
-            else if (PlayerOne.Score == MaxScore)
+            else if (Ball.Column == 0 && PlayerTwo.Score == MaxScore-1)
             {
-                new Alert(_verticalMiddle, _horizontalMiddle, "Player Two WINS!").Print();
+                Score.Print();
+                DisplayMessage("Player Two WINS!");
+                ExecCommand(Command.HomeScreen);
             }
         }
 
@@ -91,7 +99,6 @@
             alert.Print();
             Console.ReadKey(true);
             alert.Clear();
-            Ball.Reset();
         }
 
         public void ExecCommand(Command command)

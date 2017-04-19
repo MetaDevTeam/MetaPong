@@ -7,7 +7,7 @@
         public Alert(int row, int column, string text)
         {
            Elements.Add(Composer.GetBox(
-               text.Length + 4, 
+               text.Length + 6, 
                5, 
                row - 2, column - (text.Length/2) - 3));
 

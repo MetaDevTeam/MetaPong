@@ -26,8 +26,8 @@
             _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, _diameter));
 
             // set limitations for the movement of the ball;
-            LastBallRow = Console.BufferHeight - 1 - _diameter;
-            LastBallCol = Console.BufferWidth - 1 - _diameter;
+            LastBallRow = Console.BufferHeight - _diameter;
+            LastBallCol = Console.BufferWidth - _diameter;
 
             // set initial direciton;
             Up = true;
@@ -60,7 +60,7 @@
             {
                 Up = false;
             }
-            else if (!Up && Row == LastBallRow)
+            else if (!Up && Row == LastBallRow-1)
             {
                 Up = true;
             }
@@ -68,7 +68,7 @@
 
         private void SetVertical()
         {
-            if (Right && Column == LastBallCol)
+            if (Right && Column < LastBallCol)
             {
                 Right = false;
             }
@@ -80,7 +80,7 @@
 
         private void MoveRow()
         {
-            if (!Up && Row <= LastBallRow)
+            if (!Up && Row < LastBallRow)
             {
                 _rowDestination += 1;
             }
@@ -94,7 +94,7 @@
 
         private void MoveCol()
         {
-            if (Right && Column <= LastBallCol)
+            if (Right && Column < LastBallCol)
             {
                 _columnDestination += 1;
             }
