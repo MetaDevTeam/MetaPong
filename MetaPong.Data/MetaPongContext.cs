@@ -11,6 +11,7 @@ namespace MetaPong.Data
             : base("name=MetaPongContext")
         {
             //Database.SetInitializer(new DropCreateDatabaseAlways<MetaPongContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<MetaPongContext>());
         }
         
         public virtual DbSet<User> Users { get; set; }

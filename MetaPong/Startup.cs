@@ -14,6 +14,9 @@
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
     using Data;
+    using System.Linq;
+    using DataModels.Models;
+    using Data.ImportData;
 
     class Startup
     {
@@ -210,7 +213,28 @@
         {
 
             var context = new MetaPongContext();
-            context.Database.Initialize(true);
+            //context.Database.Initialize(true);
+
+            //User for test.
+            string user = "Mitko";
+            string user1 = "Zlatio";
+            string user2 = "Pesho";
+            string user3 = "Ginka";
+
+            Import.ImportUser(context, user);
+            Import.ImportUser(context, user1);
+            Import.ImportUser(context, user2);
+            Import.ImportUser(context, user3);
+
+            //Game for test.
+
+            //bool scoreWin = true;
+            //bool scoreWinf = false;
+            //
+            //Import.ImportGame(context, scoreWin, user);
+            //Import.ImportGame(context, scoreWinf, user1);
+            //Import.ImportGame(context, scoreWin, user2);
+            //Import.ImportGame(context, scoreWinf, user3);
 
             HomeScreen(ScreenWidth,ScreenHeight);
 

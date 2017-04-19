@@ -66,6 +66,7 @@
     <Compile Include="PongElements\PrintElements\PrintPosition.cs" />
     <Compile Include="PongElements\PrintElements\PrintResults.cs" />
     <Compile Include="PongElements\SetPosition.cs" />
+    <Compile Include="PongElements\UserCheck\UserCheckIfExist.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
