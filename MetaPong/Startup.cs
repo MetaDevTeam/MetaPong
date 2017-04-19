@@ -103,13 +103,13 @@
                         break;
                     case Command.Execute:
                         Command menuCommand = (homeMenu.GetSelected()).Command;
-                        ParseMenuCommand(menuCommand);
+                        ExecCommand(menuCommand);
                         break;
                 }
             }
         }
 
-        static void ParseMenuCommand(Command command)
+        static void ExecCommand(Command command)
         {
             switch (command)
             {
@@ -122,6 +122,13 @@
                     Console.Clear();
                     Console.WriteLine("Exit successful!");
                     Environment.Exit(0);
+                    break;
+                case Command.HomeScreen:
+                    //end game clear da go to home screen
+                    Console.Clear();
+                    ResetScore();
+                    HomeScreen(ScreenWidth,ScreenHeight);
+
                     break;
             }
         }
@@ -152,6 +159,10 @@
                     {
                         playerOne.MoveDown();
                     }
+                    if (keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        ExecCommand(Command.HomeScreen);
+                    }
                 }
                 // move second player
                 playerTwo.Tick(ball);
@@ -175,8 +186,7 @@
                     || PrintResults.secondPlayerResults == maxPoints
                     )
                 {
-                    PrintResults.firstPlayerResults = 0;
-                    PrintResults.secondPlayerResults = 0;
+                    ResetScore();
                     break;
                 }
                 //------
@@ -184,6 +194,12 @@
             }
 
             HomeScreen(ScreenWidth,ScreenHeight);
+        }
+
+        private static void ResetScore()
+        {
+            PrintResults.firstPlayerResults = 0;
+            PrintResults.secondPlayerResults = 0;
         }
 
         static void RenderLogo(int startRow, int startColumn)
