@@ -1,9 +1,7 @@
 namespace MetaPong.Data
 {
     using DataModels.Models;
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class MetaPongContext : DbContext
     {

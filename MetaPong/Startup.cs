@@ -14,8 +14,6 @@
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
     using Data;
-    using System.Linq;
-    using DataModels.Models;
     using Data.ImportData;
 
     class Startup

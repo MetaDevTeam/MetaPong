@@ -1,8 +1,9 @@
-﻿using MetaPong.DataModels.Models;
-using System.Linq;
-
+﻿
 namespace MetaPong.Data.ImportData
 {
+    using MetaPong.DataModels.Models;
+    using System.Linq;
+
     public class Import
     {
         public static void ImportUser(MetaPongContext context, string user)
