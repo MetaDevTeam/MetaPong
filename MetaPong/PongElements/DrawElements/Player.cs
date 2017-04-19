@@ -6,7 +6,7 @@
 
     public class Player: MovingElement
     {
-        public int Thickness = 2;
+        public int Width = 2;
         public int Height = 8;
         private bool _changed;
         internal int _score;
@@ -16,7 +16,7 @@
 
         public Player(int row, int column) : base(row, column)
         {
-            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness, Height));
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Width, Height));
             _changed = true;
             _score = 0;
         }
@@ -25,7 +25,7 @@
         {
             _column = GetSide(side);
             _columnDestination = _column;
-            _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness,Height));
+            _layout = Composer.Compose(Composer.MakeBoxLayout(Width,Height));
             _changed = true;
             _score = 0;
         }
@@ -41,7 +41,7 @@
             switch (side)
             {
                 case "Right":
-                    return 130 - Thickness;
+                    return 130 - Width;
                 default:
                     return 0;
             }

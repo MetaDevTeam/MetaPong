@@ -8,8 +8,8 @@
     public class Ball: MovingElement
     {
         private int _diameter;
-        public int LastBallRow;
-        public int LastBallCol;
+        public int LastRow;
+        public int LastCol;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ball"/> class.
@@ -26,8 +26,8 @@
             _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, _diameter));
 
             // set limitations for the movement of the ball;
-            LastBallRow = Console.BufferHeight - _diameter;
-            LastBallCol = Console.BufferWidth - _diameter;
+            LastRow = Console.BufferHeight - _diameter;
+            LastCol = Console.BufferWidth - _diameter;
 
             // set initial direciton;
             Up = true;
@@ -50,6 +50,8 @@
             }
         }
 
+        public int Radius => _diameter / 2;
+
         // movement direction and managment
         public bool Up { get; set; }
         public bool Right { get; set; }
@@ -60,27 +62,15 @@
             {
                 Up = false;
             }
-            else if (!Up && Row == LastBallRow-1)
+            else if (!Up && Row == LastRow-1)
             {
                 Up = true;
             }
         }
 
-        private void SetVertical()
-        {
-            if (Right && Column < LastBallCol)
-            {
-                Right = false;
-            }
-            else if (!Right && Column == 0)
-            {
-                Right = true;
-            }
-        }
-
         private void MoveRow()
         {
-            if (!Up && Row < LastBallRow)
+            if (!Up && Row < LastRow)
             {
                 _rowDestination += 1;
             }
@@ -94,7 +84,7 @@
 
         private void MoveCol()
         {
-            if (Right && Column < LastBallCol)
+            if (Right && Column < LastCol)
             {
                 _columnDestination += 1;
             }
@@ -102,8 +92,6 @@
             {
                 _columnDestination -= 1;
             }
-
-            SetVertical();
         }
 
         public void Reset()

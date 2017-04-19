@@ -20,7 +20,7 @@
         // General game constants
         public const int ScreenWidth = 130;
         public const int ScreenHeight = 40;
-        public const int MaxPoints = 2;
+        public const int MaxPoints = 5;
         public const int Speed = 50;
 
         public static void HomeScreen(int width, int height)
@@ -151,36 +151,9 @@
             var playerOne = new Player(playerMiddle,"Left");
             var playerTwo = new PlayerBot(playerMiddle,"Right", 60);
 
-            var game = new GameController(playerOne,playerTwo);
+            var game = new GameController(playerOne, playerTwo, speed, maxPoints);
 
             game.Load();
-
-            while (true)
-            {
-                // move first player
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo keyInfo = Console.ReadKey();
-                    if (keyInfo.Key == ConsoleKey.UpArrow)
-                    {
-                        game.PlayerOne.MoveUp();
-                        //Console.Beep(40 * 100, 100);
-                    }
-                    if (keyInfo.Key == ConsoleKey.DownArrow)
-                    {
-                        game.PlayerOne.MoveDown();
-                        //Console.Beep(10 * 100, 100);
-                    }
-                    if (keyInfo.Key == ConsoleKey.Escape)
-                    {
-                        ExecCommand(Command.HomeScreen);
-                    }
-                }
-                
-                game.Tick();
-                //------
-                Thread.Sleep(speed);
-            }
         }
 
         public static void ResetScore()
@@ -218,22 +191,22 @@
         static void Main()
         {
 
-            var context = new MetaPongContext();
+            //var context = new MetaPongContext();
             //context.Database.Initialize(true);
 
-            //User for test.
+            ////User for test.
             //string user = "Mitko";
             //string user1 = "Zlatio";
             //string user2 = "Pesho";
             //string user3 = "Ginka";
-            //
+
             //Import.ImportUser(context, user);
             //Import.ImportUser(context, user1);
             //Import.ImportUser(context, user2);
             //Import.ImportUser(context, user3);
-            //
+
             ////Game for test.
-            //
+
             //Import.ImportGame(context, true, user);
             //Import.ImportGame(context, false, user1);
             //Import.ImportGame(context, true, user2);

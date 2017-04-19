@@ -1,6 +1,7 @@
 ﻿namespace MetaPong.PongElements
 {
     using System;
+    using System.Threading;
     using DrawElements;
     using Utilities.Enumeration;
     using Utilities.ScreenElements;
@@ -12,6 +13,7 @@
         private int _verticalMiddle;
         private int _horizontalMiddle;
         private Label _score;
+        private int _speed;
         private const string ScoresTemplate = "{0} sored!";
         private const string WinsTemplate = "{0} WINS!";
 
@@ -20,7 +22,9 @@
         /// </summary>
         /// <param name="playerOne">The first player, should be controlled by user.</param>
         /// <param name="playerTwo">The second player controlled by a bot. </param>
-        public GameController(Player playerOne, PlayerBot playerTwo)
+        /// <param name="speed">Larger values make the game slower.</param>
+        /// <param name="maxScore">Defines the score at which the game ends.</param>
+        public GameController(Player playerOne, PlayerBot playerTwo, int speed=50, int maxScore=10)
         {
             // set players
             PlayerOne = playerOne;
@@ -40,8 +44,8 @@
             MessageWins = new Alert(_verticalMiddle, _horizontalMiddle, WinsTemplate);
             MessageScores = new Alert(_verticalMiddle, _horizontalMiddle, ScoresTemplate);
 
-            // max score
-            MaxScore = 2;
+            _speed = speed;
+            MaxScore = maxScore;
         }
 
         public Player PlayerOne { get; set; }
@@ -58,39 +62,103 @@
             PlayerOne.Print();
             PlayerTwo.Print();
             Ball.Print();
+
+            while (true)
+            {
+                // move first player
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    if (keyInfo.Key == ConsoleKey.UpArrow)
+                    {
+                        PlayerOne.MoveUp();
+                        //Console.Beep(40 * 100, 100);
+                    }
+                    if (keyInfo.Key == ConsoleKey.DownArrow)
+                    {
+                        PlayerOne.MoveDown();
+                        //Console.Beep(10 * 100, 100);
+                    }
+                    if (keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        ExecCommand(Command.HomeScreen);
+                    }
+                }
+
+                Tick();
+
+                Thread.Sleep(_speed);
+            }
         }
 
+        private void PongBall()
+        {
+            if (Ball.Right && 
+                Ball.Column == Ball.LastCol && 
+                Aligned(PlayerTwo))
+            {
+                Ball.Right = false;
+            }
+            else if(Ball.Column == PlayerOne.Width+1 && Aligned(PlayerOne))
+            {
+                Ball.Right = true;
+            }
+        }
+
+        private bool Aligned(Player player)
+        {
+            return Ball.Row <= player.Row - Ball.Radius && 
+                   Ball.Row >= player.Row + player.Height + Ball.Radius;
+        }
+
+        // Score methods
         private void UpdateScore()
         {
             if (Ball.Column == 0 && PlayerTwo.Score < MaxScore - 1)
             {
                 PlayerTwo._score += 1;
-                Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
-                Score.Print();
+                RefreshScore();
                 DisplayMessage("Player Two scored!");
                 Ball.Reset();
             }
-            else if (Ball.Column == Ball.LastBallCol && PlayerOne.Score < MaxScore - 1)
+            else if (Ball.Column == Ball.LastCol && PlayerOne.Score < MaxScore - 1)
             {
                 PlayerOne._score += 1;
-                Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
-                Score.Print();
+                RefreshScore();
                 DisplayMessage("Player One scored!");
                 Ball.Reset();
             }
-            else if (Ball.Column == Ball.LastBallCol && PlayerOne.Score == MaxScore-1)
+            else if (Ball.Column == Ball.LastCol && PlayerOne.Score == MaxScore-1)
             {
-
-                Score.Print();
+                PlayerOne.Score += 1;
+                RefreshScore();
                 DisplayMessage("Player One WINS!");
                 ExecCommand(Command.HomeScreen);
             }
             else if (Ball.Column == 0 && PlayerTwo.Score == MaxScore-1)
             {
-                Score.Print();
+                PlayerTwo.Score += 1;
+                RefreshScore();
                 DisplayMessage("Player Two WINS!");
                 ExecCommand(Command.HomeScreen);
             }
+        }
+
+        private void RefreshScore()
+        {
+            Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
+            Score.Print();
+        }
+
+        private void ResetScores()
+        {
+            PlayerOne._score = 0;
+            PlayerTwo._score = 0;
+        }
+
+        public void DisplayScore()
+        {
+            Score.Print();
         }
 
         private void DisplayMessage(string playerTwoScored)
@@ -119,17 +187,6 @@
             }
         }
 
-        private void ResetScores()
-        {
-            PlayerOne._score = 0;
-            PlayerTwo._score = 0;
-        }
-
-        public void DisplayScore()
-        {
-            Score.Print();
-        }
-
         public void Tick()
         {
             // iterate bot player
@@ -147,6 +204,10 @@
             // draw the ball
             Ball.Move();
 
+            //Check pong
+            PongBall();
+
+            // update score
             UpdateScore();
             Score.Print();
         }
