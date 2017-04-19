@@ -117,6 +117,12 @@
                     Thread.Sleep(1000);
                     RunPong(Speed,MaxPoints);
                     break;
+                case Command.TwoPlayers:
+                    Console.Clear();
+                    Console.WriteLine("Add Username:");
+                    Console.ReadLine();
+                    HomeScreen(ScreenWidth, ScreenHeight);
+                    break;
                 case Command.Exit:
                     Console.Clear();
                     Console.WriteLine("Exit successful!");
