@@ -12,6 +12,8 @@
     using Utilities.Input;
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
+    using Data;
+    using Data.ImportData;
 
     public class Startup
     {
@@ -110,12 +112,21 @@
 
         public static void ExecCommand(Command command)
         {
+            var context = new MetaPongContext();
+
             switch (command)
             {
                 case Command.OnePlayer:
                     RenderLogo(2, 35);
                     Thread.Sleep(1000);
                     RunPong(Speed,MaxPoints);
+                    break;
+                case Command.TwoPlayers:
+                    Console.Clear();
+                    Console.WriteLine("Add Username:");
+                    var username = Console.ReadLine();
+                    Import.ImportUser(context, username);
+                    HomeScreen(ScreenWidth, ScreenHeight);
                     break;
                 case Command.Exit:
                     Console.Clear();
@@ -206,9 +217,32 @@
 
         static void Main()
         {
+
+            var context = new MetaPongContext();
+            //context.Database.Initialize(true);
+
+            //User for test.
+            //string user = "Mitko";
+            //string user1 = "Zlatio";
+            //string user2 = "Pesho";
+            //string user3 = "Ginka";
+            //
+            //Import.ImportUser(context, user);
+            //Import.ImportUser(context, user1);
+            //Import.ImportUser(context, user2);
+            //Import.ImportUser(context, user3);
+            //
+            ////Game for test.
+            //
+            //Import.ImportGame(context, true, user);
+            //Import.ImportGame(context, false, user1);
+            //Import.ImportGame(context, true, user2);
+            //Import.ImportGame(context, false, user3);
+
             HomeScreen(ScreenWidth,ScreenHeight);
 
             RunPong(Speed,MaxPoints);
+            
         }
     }
 }

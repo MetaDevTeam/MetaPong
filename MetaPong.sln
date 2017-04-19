@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong", "MetaPong\MetaPong.csproj", "{2A968462-231D-42BB-A706-484694B7AC76}"
 EndProject
@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C61490
 		Images\software-university-logo.jpg = Images\software-university-logo.jpg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.DataModels", "MetaPong.DataModels\MetaPong.DataModels.csproj", "{394BB8F3-9A3A-4B76-8ABE-D5250A764203}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.DataModels", "MetaPong.DataModels\MetaPong.DataModels.csproj", "{055F7B65-F8DA-4AF0-B937-A11727CFD095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaPong.Data", "MetaPong.Data\MetaPong.Data.csproj", "{05201169-FCF9-45D7-A7D4-20185416DAA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,14 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{394BB8F3-9A3A-4B76-8ABE-D5250A764203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055F7B65-F8DA-4AF0-B937-A11727CFD095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055F7B65-F8DA-4AF0-B937-A11727CFD095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055F7B65-F8DA-4AF0-B937-A11727CFD095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055F7B65-F8DA-4AF0-B937-A11727CFD095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05201169-FCF9-45D7-A7D4-20185416DAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05201169-FCF9-45D7-A7D4-20185416DAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05201169-FCF9-45D7-A7D4-20185416DAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05201169-FCF9-45D7-A7D4-20185416DAA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

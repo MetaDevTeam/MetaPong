@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MetaPong.DataModels")]
+[assembly: AssemblyTitle("MetaPong.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MetaPong.DataModels")]
+[assembly: AssemblyProduct("MetaPong.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("055f7b65-f8da-4af0-b937-a11727cfd095")]
+[assembly: Guid("05201169-fcf9-45d7-a7d4-20185416daa6")]
 
 // Version information for an assembly consists of the following four values:
 //
