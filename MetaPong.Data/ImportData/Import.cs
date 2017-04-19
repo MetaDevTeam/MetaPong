@@ -17,7 +17,7 @@ namespace MetaPong.Data.ImportData
             context.SaveChanges();
         }
 
-        public static void ImportGame(MetaPongContext context, bool ScoreWin, string user)
+        public static void ImportGame(MetaPongContext context, bool scoreWin, string user)
         {
             var dataUser = context.Users
                 .Where(u => u.Username == user)
@@ -26,9 +26,11 @@ namespace MetaPong.Data.ImportData
             var game = new Game
             {
                 Finished = true,
-                ScoreWin = ScoreWin,
+                ScoreWin = scoreWin,
                 UserId = dataUser.Id
             };
+
+            context.Games.Add(game);
 
             context.SaveChanges();
         }

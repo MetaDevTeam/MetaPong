@@ -228,13 +228,10 @@
 
             //Game for test.
 
-            //bool scoreWin = true;
-            //bool scoreWinf = false;
-            //
-            //Import.ImportGame(context, scoreWin, user);
-            //Import.ImportGame(context, scoreWinf, user1);
-            //Import.ImportGame(context, scoreWin, user2);
-            //Import.ImportGame(context, scoreWinf, user3);
+            Import.ImportGame(context, true, user);
+            Import.ImportGame(context, false, user1);
+            Import.ImportGame(context, true, user2);
+            Import.ImportGame(context, false, user3);
 
             HomeScreen(ScreenWidth,ScreenHeight);
 

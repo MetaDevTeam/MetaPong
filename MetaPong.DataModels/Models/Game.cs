@@ -15,11 +15,11 @@ namespace MetaPong.DataModels.Models
         [Required]
         public bool Finished { get; set; }
 
-        public bool ScoreWin { get; set; }
+        public bool? ScoreWin { get; set; }
 
-        public int Difference { get; set; }
+        public int? Difference { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [Required]
         public int UserId { get; set; }
