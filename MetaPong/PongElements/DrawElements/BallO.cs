@@ -8,15 +8,24 @@
     public class BallO: ScreenLayout
     {
         private int _diameter;
+        private int _lastBallRow;
+        private int _lastBallCol;
 
         public BallO(int row, int column, int diameter) : base(row, column)
         {
+            // set positon, diameter, and visualization;
             _row = row;
             _column = column;
             Diameter = diameter;
+            _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, _diameter));
+
+            // set limitations for the movement of the ball;
+            _lastBallRow = Console.BufferHeight - 1 - _diameter;
+            _lastBallCol = Console.BufferWidth - 1 - _diameter;
+
+            // set initial direciton;
             Up = true;
             Right = true;
-            _layout = Composer.Compose(Composer.MakeBoxLayout(_diameter, _diameter));
         }
 
         public int Diameter
@@ -35,45 +44,25 @@
             }
         }
 
+        // movement direction and managment
         public bool Up { get; set; }
         public bool Right { get; set; }
 
-        private void MoveRow()
+        private void SetHorizontal()
         {
-            int lastBallRow = Console.BufferHeight - 1 - _diameter;
-            if (!Up && Row <= lastBallRow)
-            {
-                Row += 1;
-            }
-            else if (Up && Row > 0)
-            {
-                Row -= 1;
-            }
-
             if (Up && Row == 0)
             {
                 Up = false;
             }
-            else if (!Up && Row == lastBallRow)
+            else if (!Up && Row == _lastBallRow)
             {
                 Up = true;
             }
         }
 
-        private void MoveCol()
+        private void SetVertical()
         {
-            int lastBallCol = Console.WindowWidth - 1 - _diameter;
-
-            if (Right && Column <= lastBallCol)
-            {
-                Column += 1;
-            }
-            else if (!Right && Column > 0)
-            {
-                Column -= 1;
-            }
-
-            if (Right && Column == lastBallCol)
+            if (Right && Column == _lastBallCol)
             {
                 Right = false;
             }
@@ -81,6 +70,34 @@
             {
                 Right = true;
             }
+        }
+
+        private void MoveRow()
+        {
+            if (!Up && Row <= _lastBallRow)
+            {
+                _destinationRow += 1;
+            }
+            else if (Up && Row > 0)
+            {
+                _destinationRow -= 1;
+            }
+
+            SetHorizontal();
+        }
+
+        private void MoveCol()
+        {
+            if (Right && Column <= _lastBallCol)
+            {
+                _destinationColumn += 1;
+            }
+            else if (!Right && Column > 0)
+            {
+                _destinationColumn -= 1;
+            }
+
+            SetVertical();
         }
 
         public void Tick()

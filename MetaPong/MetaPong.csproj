@@ -58,7 +58,6 @@
     <Compile Include="PongElements\ElementsMovement\PlayerMovement.cs" />
     <Compile Include="PongElements\PrintElements\PrintPosition.cs" />
     <Compile Include="PongElements\PrintElements\PrintResults.cs" />
-    <Compile Include="PongElements\SetPosition.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

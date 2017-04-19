@@ -1,6 +1,5 @@
 ﻿namespace MetaPong.PongElements.DrawElements
 {
-    using System;
     using Utilities;
     using Utilities.ScreenElements;
 
@@ -16,16 +15,14 @@
 
         public PlayerO(int row, int column) : base(row, column)
         {
-            Column = column;
-            Row = row;
             _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness, Height));
             _changed = true;
         }
 
         public PlayerO(int row, string side) : base(row)
         {
-            Column = GetSide(side);
-            Row = row;
+            _column = GetSide(side);
+            _destinationColumn = _column;
             _layout = Composer.Compose(Composer.MakeBoxLayout(Thickness,Height));
             _changed = true;
         }
@@ -45,7 +42,7 @@
         {
             if (Row > 0)
             {
-                Row -= 1;
+                _destinationRow = Row - 1;
                 _changed = true;
             }
         }
@@ -54,16 +51,8 @@
         {
             if (Row < ScreenHeight - Height)
             {
-                Row += 1;
+                _destinationRow = Row + 1;
                 _changed = true;
-            }
-        }
-
-        public override void Hide()
-        {
-            if (_changed)
-            {
-                base.Hide();
             }
         }
 

@@ -6,7 +6,7 @@
 
     public class PlayerBot: PlayerO
     {
-        private static Random _random = new Random();
+        private static readonly Random Random = new Random();
         private int _accuracy;
 
         public PlayerBot(int row, int column, string side, int accuracy) : base(row, column)
@@ -37,7 +37,7 @@
 
         public void Tick(BallO ball)
         {
-            int randomNum = _random.Next(1, 101);
+            int randomNum = Random.Next(1, 101);
 
             if (randomNum <= _accuracy)
             {

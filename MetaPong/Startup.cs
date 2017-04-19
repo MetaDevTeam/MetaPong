@@ -135,10 +135,12 @@
 
         private static void RunPong(int speed, int maxPoints)
         {
-            SetPosition.SetInitialPosition();
+            Console.Clear();
 
-            var playerOne = new PlayerO(ScreenHeight/2 - 4,"Left");
-            var playerTwo = new PlayerBot(ScreenHeight/2 - 4,"Right", 60);
+            int verticalMiddle = ScreenHeight/2 - 4;
+
+            var playerOne = new PlayerO(verticalMiddle,"Left");
+            var playerTwo = new PlayerBot(verticalMiddle,"Right", 60);
             var ball = new BallO(ScreenHeight / 2 - 1,ScreenWidth/2-1,2);
 
             playerOne.Print();
@@ -154,10 +156,12 @@
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
                         playerOne.MoveUp();
+                        Console.Beep(40 * 100, 100);
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
                         playerOne.MoveDown();
+                        Console.Beep(10 * 100, 100);
                     }
                     if (keyInfo.Key == ConsoleKey.Escape)
                     {

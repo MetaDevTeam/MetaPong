@@ -12,7 +12,7 @@
         public ScreenLayout(int row, int column)
             : base(row, column)
         {
-            _destinationRow = row;
+            _destinationRow = _row;
             _destinationColumn = column;
             _layout = new[] { "" };
             _visible = false;
@@ -20,10 +20,8 @@
 
         public ScreenLayout(int row) : base(row)
         {
-            _column = 0;
-            _row = row;
-            _destinationRow = row;
-            _destinationColumn = 0;
+            _destinationRow = _row;
+            _destinationColumn = _column;
             _visible = false;
         }
 
@@ -38,24 +36,15 @@
             {
                 Console.MoveBufferArea(
                     _column,
-                    _row,_layout[0].Length,
+                    _row,
+                    _layout[0].Length,
                     _layout.Length,
                     _destinationColumn,
-                    _destinationRow,
-                    ' ',
-                    ConsoleColor.Black,
-                    ConsoleColor.Black
+                    _destinationRow
                 );
-                _destinationRow = _row;
-                _destinationColumn = _column;
+                _row = _destinationRow;
+                _column = _destinationColumn;
             }
-        }
-
-        public virtual void Hide()
-        {
-            Console.ForegroundColor = ConsoleColor.Black;
-            Print();
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public override void Print()
