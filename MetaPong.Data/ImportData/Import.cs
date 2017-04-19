@@ -6,22 +6,33 @@ namespace MetaPong.Data.ImportData
 
     public class Import
     {
-        public static void ImportUser(MetaPongContext context, string user)
+        public static void ImportUser(MetaPongContext context, string username)
         {
-            var users = new User
+            //var dataUser = context.Users
+            //    .Where(u => u.Username == username)
+            //    .FirstOrDefault();
+
+            if (!context.Users.Any(u => u.Username == username))
             {
-                Username = user
-            };
+                var users = new User
+                {
+                    Username = username
+                };
 
-            context.Users.Add(users);
+                context.Users.Add(users);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            else
+            {
+                System.Console.WriteLine($"{username} already exists!");
+            }
         }
 
-        public static void ImportGame(MetaPongContext context, bool scoreWin, string user)
+        public static void ImportGame(MetaPongContext context, bool scoreWin, string username)
         {
             var dataUser = context.Users
-                .Where(u => u.Username == user)
+                .Where(u => u.Username == username)
                 .FirstOrDefault();
 
             var game = new Game

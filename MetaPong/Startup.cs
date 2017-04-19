@@ -112,6 +112,8 @@
 
         public static void ExecCommand(Command command)
         {
+            var context = new MetaPongContext();
+
             switch (command)
             {
                 case Command.OnePlayer:
@@ -122,7 +124,8 @@
                 case Command.TwoPlayers:
                     Console.Clear();
                     Console.WriteLine("Add Username:");
-                    Console.ReadLine();
+                    var username = Console.ReadLine();
+                    Import.ImportUser(context, username);
                     HomeScreen(ScreenWidth, ScreenHeight);
                     break;
                 case Command.Exit:
@@ -219,22 +222,22 @@
             //context.Database.Initialize(true);
 
             //User for test.
-            string user = "Mitko";
-            string user1 = "Zlatio";
-            string user2 = "Pesho";
-            string user3 = "Ginka";
-
-            Import.ImportUser(context, user);
-            Import.ImportUser(context, user1);
-            Import.ImportUser(context, user2);
-            Import.ImportUser(context, user3);
-
-            //Game for test.
-
-            Import.ImportGame(context, true, user);
-            Import.ImportGame(context, false, user1);
-            Import.ImportGame(context, true, user2);
-            Import.ImportGame(context, false, user3);
+            //string user = "Mitko";
+            //string user1 = "Zlatio";
+            //string user2 = "Pesho";
+            //string user3 = "Ginka";
+            //
+            //Import.ImportUser(context, user);
+            //Import.ImportUser(context, user1);
+            //Import.ImportUser(context, user2);
+            //Import.ImportUser(context, user3);
+            //
+            ////Game for test.
+            //
+            //Import.ImportGame(context, true, user);
+            //Import.ImportGame(context, false, user1);
+            //Import.ImportGame(context, true, user2);
+            //Import.ImportGame(context, false, user3);
 
             HomeScreen(ScreenWidth,ScreenHeight);
 
