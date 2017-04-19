@@ -39,6 +39,9 @@
             // alerts
             MessageWins = new Alert(_verticalMiddle, _horizontalMiddle, WinsTemplate);
             MessageScores = new Alert(_verticalMiddle, _horizontalMiddle, ScoresTemplate);
+
+            // max score
+            MaxScore = 2;
         }
 
         public Player PlayerOne { get; set; }
@@ -63,13 +66,13 @@
             {
                 PlayerTwo._score += 1;
                 Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
-                new Alert(_verticalMiddle, _horizontalMiddle, "Player Two scored!").Print();
+                DisplayMessage("Player Two scored!");
             }
             else if (Ball.Column > Ball.LastBallCol - PlayerTwo.Thickness)
             {
                 PlayerOne._score += 1;
                 Score.Content = $"{PlayerOne._score}-{PlayerTwo._score}";
-                new Alert(_verticalMiddle, _horizontalMiddle, "Player One scored!").Print();
+                DisplayMessage("Player One scored!");
             }
             if (PlayerOne.Score == MaxScore)
             {
@@ -80,6 +83,15 @@
             {
                 new Alert(_verticalMiddle, _horizontalMiddle, "Player Two WINS!").Print();
             }
+        }
+
+        private void DisplayMessage(string playerTwoScored)
+        {
+            var alert = new Alert(_verticalMiddle, _horizontalMiddle, playerTwoScored);
+            alert.Print();
+            Console.ReadKey(true);
+            alert.Clear();
+            Ball.Reset();
         }
 
         public void ExecCommand(Command command)

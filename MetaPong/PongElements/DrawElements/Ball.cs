@@ -106,6 +106,13 @@
             SetVertical();
         }
 
+        public void Reset()
+        {
+            _columnDestination = Console.BufferWidth / 2;
+            _rowDestination = Console.BufferHeight / 2;
+            Move();
+        }
+
         public void Tick()
         {
             MoveCol();
