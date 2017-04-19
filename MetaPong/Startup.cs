@@ -2,11 +2,10 @@
 {
     using CmdArt;
     using CmdArt.Screen;
-    using PongElements;
     using PongElements.DrawElements;
-    using PongElements.ElementsMovement;
     using System;
     using System.Threading;
+    using PongElements;
     using PongElements.PrintElements;
     using Utilities;
     using Utilities.Enumeration;
@@ -14,15 +13,15 @@
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
 
-    class Startup
+    public class Startup
     {
         // General game constants
-        private const int ScreenWidth = 130;
-        private const int ScreenHeight = 40;
-        private const int MaxPoints = 2;
-        private const int Speed = 50;
+        public const int ScreenWidth = 130;
+        public const int ScreenHeight = 40;
+        public const int MaxPoints = 2;
+        public const int Speed = 50;
 
-        private static void HomeScreen(int width, int height)
+        public static void HomeScreen(int width, int height)
         {
             // Setup screen
             int windowWidth = width; //Console.LargestWindowWidth; or 130
@@ -51,17 +50,17 @@
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
 
-            var playerOne = new PlayerO(player1Row,"Left");
-            var playerTwo = new PlayerO(player2Row,"Right");
+            var playerOne = new Player(player1Row,"Left");
+            var playerTwo = new Player(player2Row,"Right");
 
             // Ball
             int ballSize = 2;
             int ballRow = random.Next(1,windowHeight - ballSize);
             int ballHeight = random.Next(1, windowWidth - ballSize);
-            BallO ball = new BallO(ballRow, ballHeight, ballSize);
+            Ball ball = new Ball(ballRow, ballHeight, ballSize);
 
             // Menu frame
-            ScreenLayout menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
+            MovingElement menuFrame = Composer.GetBox(15, 10, startRow - 2, startColumn - 3);
 
             // Remder Logo
             RenderLogo(2, startColumn-25);
@@ -109,7 +108,7 @@
             }
         }
 
-        static void ExecCommand(Command command)
+        public static void ExecCommand(Command command)
         {
             switch (command)
             {
@@ -133,19 +132,17 @@
             }
         }
 
-        private static void RunPong(int speed, int maxPoints)
+        public static void RunPong(int speed, int maxPoints)
         {
-            Console.Clear();
+            const int verticalMiddle = ScreenHeight / 2;
+            const int playerMiddle = verticalMiddle - 4;
 
-            int verticalMiddle = ScreenHeight/2 - 4;
+            var playerOne = new Player(playerMiddle,"Left");
+            var playerTwo = new PlayerBot(playerMiddle,"Right", 60);
 
-            var playerOne = new PlayerO(verticalMiddle,"Left");
-            var playerTwo = new PlayerBot(verticalMiddle,"Right", 60);
-            var ball = new BallO(ScreenHeight / 2 - 1,ScreenWidth/2-1,2);
+            var game = new GameController(playerOne,playerTwo);
 
-            playerOne.Print();
-            playerTwo.Print();
-            ball.Print();
+            game.Load();
 
             while (true)
             {
@@ -155,58 +152,33 @@
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        playerOne.MoveUp();
-                        Console.Beep(40 * 100, 100);
+                        game.PlayerOne.MoveUp();
+                        //Console.Beep(40 * 100, 100);
                     }
                     if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        playerOne.MoveDown();
-                        Console.Beep(10 * 100, 100);
+                        game.PlayerOne.MoveDown();
+                        //Console.Beep(10 * 100, 100);
                     }
                     if (keyInfo.Key == ConsoleKey.Escape)
                     {
                         ExecCommand(Command.HomeScreen);
                     }
                 }
-                // move second player
-                playerTwo.Tick(ball);
-
-                // move ball
-                ball.Tick();
-
-                // - draw first player
-                playerOne.Move();
-
-                // - draw second player
-                playerTwo.Move();
-
-                // - draw ball
-                ball.Move();
-
-                // - print result
-                PrintResults.PrintResult();
-
-                if (PrintResults.firstPlayerResults == maxPoints 
-                    || PrintResults.secondPlayerResults == maxPoints
-                    )
-                {
-                    ResetScore();
-                    break;
-                }
+                
+                game.Tick();
                 //------
                 Thread.Sleep(speed);
             }
-
-            HomeScreen(ScreenWidth,ScreenHeight);
         }
 
-        private static void ResetScore()
+        public static void ResetScore()
         {
             PrintResults.firstPlayerResults = 0;
             PrintResults.secondPlayerResults = 0;
         }
 
-        static void RenderLogo(int startRow, int startColumn)
+        public static void RenderLogo(int startRow, int startColumn)
         {
             string imageFile = "../../../Images/Code-Wizard.png";
             var screen = new TerminalScreen();

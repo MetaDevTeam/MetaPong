@@ -3,7 +3,7 @@
   <Class Name="MetaPong.Utilities.ScreenElements.ScreenElement">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAgAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAIAAAABAAAAAAAAAAgAAAAAAAAAEAAA=</HashCode>
       <FileName>ScreenElements\ScreenElement.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -21,13 +21,6 @@
       <FileName>ScreenElements\Label.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.ScreenElements.ScreenLayout">
-    <Position X="1.25" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAACAAAAAAAAAEAAA=</HashCode>
-      <FileName>ScreenElements\ScreenLayout.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MetaPong.Utilities.ScreenElements.Composit.Menu">
     <Position X="7.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
@@ -35,11 +28,11 @@
       <FileName>ScreenElements\Composit\Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.Decoration">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+  <Class Name="MetaPong.Utilities.ScreenElements.ScreenObject">
+    <Position X="0.5" Y="3.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
-      <FileName>ScreenElements\Composit\Decoration.cs</FileName>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAACBACAAAAAABAAECAA=</HashCode>
+      <FileName>ScreenElements\ScreenObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -25,12 +25,12 @@ namespace MetaPong.PongElements.ElementsMovement
         {
             if (ballDirectionRight)
             {
-                Ball.ballPositionX++;
+                BallOld.ballPositionX++;
             }
 
             else
             {
-                Ball.ballPositionX--;
+                BallOld.ballPositionX--;
             }
         }
 
@@ -38,21 +38,21 @@ namespace MetaPong.PongElements.ElementsMovement
         {
             if (ballDirectionUp)
             {
-                Ball.ballPositionY--;
+                BallOld.ballPositionY--;
             }
 
             else
             {
-                Ball.ballPositionY++;
+                BallOld.ballPositionY++;
             }
         }
 
         private static void HitSecondPlayerPad()
         {
-            if (Ball.ballPositionX >= Console.WindowWidth - 4)
+            if (BallOld.ballPositionX >= Console.WindowWidth - 4)
             {
-                if (Ball.ballPositionY >= Player.secondPlayerPosition
-                    && Ball.ballPositionY <= Player.secondPlayerPosition + Player.secondPlayerPadSize)
+                if (BallOld.ballPositionY >= PlayerOld.secondPlayerPosition
+                    && BallOld.ballPositionY <= PlayerOld.secondPlayerPosition + PlayerOld.secondPlayerPadSize)
                 {
                     ballDirectionRight = false;
                 }
@@ -61,10 +61,10 @@ namespace MetaPong.PongElements.ElementsMovement
 
         private static void HitFirstPlayerPad()
         {
-            if (Ball.ballPositionX < 3)
+            if (BallOld.ballPositionX < 3)
             {
-                if (Ball.ballPositionY >= Player.firstPlayerPosition
-                    && Ball.ballPositionY <= Player.firstPlayerPosition + Player.firstPlayerPadSize)
+                if (BallOld.ballPositionY >= PlayerOld.firstPlayerPosition
+                    && BallOld.ballPositionY <= PlayerOld.firstPlayerPosition + PlayerOld.firstPlayerPadSize)
                 {
                     ballDirectionRight = true;
                 }
@@ -73,9 +73,9 @@ namespace MetaPong.PongElements.ElementsMovement
 
         private static void LeftBorder()
         {
-            if (Ball.ballPositionX == 0)
+            if (BallOld.ballPositionX == 0)
             {
-                Ball.SetBallOnStartPosition();
+                BallOld.SetBallOnStartPosition();
                 ballDirectionRight = true;
                 ballDirectionUp = true;
                 PrintResults.secondPlayerResults++;
@@ -87,9 +87,9 @@ namespace MetaPong.PongElements.ElementsMovement
 
         private static void RightBorder()
         {
-            if (Ball.ballPositionX == Console.WindowWidth - 1)
+            if (BallOld.ballPositionX == Console.WindowWidth - 1)
             {
-                Ball.SetBallOnStartPosition();
+                BallOld.SetBallOnStartPosition();
                 ballDirectionRight = false;
                 ballDirectionUp = true;
                 PrintResults.firstPlayerResults++;
@@ -101,12 +101,12 @@ namespace MetaPong.PongElements.ElementsMovement
 
         private static void UpAndDownBorder()
         {
-            if (Ball.ballPositionY == 0)
+            if (BallOld.ballPositionY == 0)
             {
                 ballDirectionUp = false;
             }
 
-            if (Ball.ballPositionY == Console.WindowHeight - 1)
+            if (BallOld.ballPositionY == Console.WindowHeight - 1)
             {
                 ballDirectionUp = true;
             }

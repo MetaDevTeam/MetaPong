@@ -1,7 +1,10 @@
 ﻿namespace MetaPong.NUnit.Tests
 {
+    using System;
     using global::NUnit.Framework;
+    using PongElements.DrawElements;
     using Utilities;
+    using static Startup;
 
     [TestFixture]
     public class TestClass

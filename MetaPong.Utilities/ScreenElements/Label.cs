@@ -4,12 +4,18 @@
 
     public class Label: ScreenElement
     {
-        private readonly string _content;
+        private string _content;
 
         public Label(int row, int column, string content) 
             : base(row, column)
         {
             _content = content;
+        }
+
+        public string Content
+        {
+            get { return _content; }
+            set { _content = value; }
         }
 
         public override void Print()

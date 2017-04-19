@@ -2,26 +2,26 @@
 {
     using System;
 
-    public class ScreenLayout : ScreenElement
+    public class MovingElement : ScreenElement
     {
         public string[] _layout;
-        protected int _destinationRow;
-        protected int _destinationColumn;
+        protected int _rowDestination;
+        protected int _columnDestination;
         protected bool _visible;
 
-        public ScreenLayout(int row, int column)
+        public MovingElement(int row, int column)
             : base(row, column)
         {
-            _destinationRow = _row;
-            _destinationColumn = column;
+            _rowDestination = _row;
+            _columnDestination = column;
             _layout = new[] { "" };
             _visible = false;
         }
 
-        public ScreenLayout(int row) : base(row)
+        public MovingElement(int row) : base(row)
         {
-            _destinationRow = _row;
-            _destinationColumn = _column;
+            _rowDestination = _row;
+            _columnDestination = _column;
             _visible = false;
         }
 
@@ -32,18 +32,18 @@
 
         public virtual void Move()
         {
-            if (_visible && (_destinationRow != _row || _destinationColumn != _column))
+            if (_visible && (_rowDestination != _row || _columnDestination != _column))
             {
                 Console.MoveBufferArea(
                     _column,
                     _row,
                     _layout[0].Length,
                     _layout.Length,
-                    _destinationColumn,
-                    _destinationRow
+                    _columnDestination,
+                    _rowDestination
                 );
-                _row = _destinationRow;
-                _column = _destinationColumn;
+                _row = _rowDestination;
+                _column = _columnDestination;
             }
         }
 

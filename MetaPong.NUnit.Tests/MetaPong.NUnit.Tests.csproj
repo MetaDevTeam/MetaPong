@@ -48,6 +48,10 @@
       <Project>{b2544da4-ff42-4210-aea8-2e7350a30293}</Project>
       <Name>MetaPong.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MetaPong\MetaPong.csproj">
+      <Project>{2A968462-231D-42BB-A706-484694B7AC76}</Project>
+      <Name>MetaPong</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

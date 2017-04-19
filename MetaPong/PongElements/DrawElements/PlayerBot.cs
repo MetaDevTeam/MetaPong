@@ -1,10 +1,9 @@
 ﻿namespace MetaPong.PongElements.DrawElements
 {
     using System;
-    using ElementsMovement;
 
 
-    public class PlayerBot: PlayerO
+    public class PlayerBot: Player
     {
         private static readonly Random Random = new Random();
         private int _accuracy;
@@ -35,7 +34,7 @@
             }
         }
 
-        public void Tick(BallO ball)
+        public void Tick(Ball ball)
         {
             int randomNum = Random.Next(1, 101);
 

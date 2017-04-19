@@ -124,10 +124,10 @@
             }
         }
 
-        public static ScreenLayout GetBox(int width, int height, int startRow, int startColumn)
+        public static MovingElement GetBox(int width, int height, int startRow, int startColumn)
         {
             string[] matrix = Compose(MakeBoxLayout(width, height));
-            var box = new ScreenLayout(startRow, startColumn);
+            var box = new MovingElement(startRow, startColumn);
             box.SetLayout(matrix);
 
             return box;

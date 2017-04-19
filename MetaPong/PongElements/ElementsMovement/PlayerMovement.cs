@@ -7,9 +7,9 @@ namespace MetaPong.PongElements.ElementsMovement
     class PlayerMovement
     {
         private static Random _random = new Random();
-        private static PlayerO _bot;
+        private static Player _bot;
 
-        public PlayerMovement(PlayerO bot)
+        public PlayerMovement(Player bot)
         {
             _bot = bot;
         }
