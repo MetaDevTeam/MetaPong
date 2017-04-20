@@ -74,8 +74,8 @@
             homeDecoration.Add(new Label(0, startColumn + 4, $"{random.Next(0, 10)}-{random.Next(0, 10)}"));
 
             // Construct the menu
-            homeMenu.Add(new MenuItem(startRow, startColumn, "1 PLAYER", Command.OnePlayer));
-            homeMenu.Add(new MenuItem(startRow + 1, startColumn, "2 PLAYERS", Command.TwoPlayers));
+            homeMenu.Add(new MenuItem(startRow, startColumn, "NEW GAME", Command.NewGame));
+            homeMenu.Add(new MenuItem(startRow + 1, startColumn, "ADD USER", Command.AddUser));
             homeMenu.Add(new MenuItem(startRow + 2, startColumn, "OPTIONS", Command.Options));
             homeMenu.Add(new MenuItem(startRow + 3, startColumn, "SAVE GAME", Command.Save));
             homeMenu.Add(new MenuItem(startRow + 4, startColumn, "LOAD GAME", Command.Load));
@@ -115,14 +115,14 @@
 
             switch (command)
             {
-                case Command.OnePlayer:
+                case Command.NewGame:
                     RenderLogo(2, 35);
                     Thread.Sleep(1000);
                     RunPong(Speed,MaxPoints);
                     break;
-                case Command.TwoPlayers:
-                    Console.Clear();
-                    Console.WriteLine("Add Username:");
+                case Command.AddUser:
+                    var alert = new Input(ScreenHeight / 2, ScreenWidth / 2, "Add Username:", 15);
+                    alert.Print();
                     var username = Console.ReadLine();
                     Import.ImportUser(context, username);
                     HomeScreen(ScreenWidth, ScreenHeight);

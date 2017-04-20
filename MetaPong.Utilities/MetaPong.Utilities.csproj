@@ -46,6 +46,7 @@
     <Compile Include="Composer.Chars.cs" />
     <Compile Include="Composer.cs" />
     <Compile Include="ScreenElements\Composit\Alert.cs" />
+    <Compile Include="ScreenElements\Composit\Input.cs" />
     <Compile Include="ScreenElements\Composit\ScreenDecoration.cs" />
     <Compile Include="Enumeration\Command.cs" />
     <Compile Include="Input\KeyboardInput.cs" />
