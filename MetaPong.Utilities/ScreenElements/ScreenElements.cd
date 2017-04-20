@@ -1,38 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="MetaPong.Utilities.ScreenElements.ScreenElement">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAIAAAABAAAAAAAAAAgAAAAAAAAAEAAA=</HashCode>
       <FileName>ScreenElements\ScreenElement.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MetaPong.Utilities.ScreenElements.Composit.ScreenGroup">
-    <Position X="6" Y="0.5" Width="2.25" />
+    <Position X="1.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAIAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>ScreenElements\Composit\ScreenGroup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.ScreenElements.Label">
-    <Position X="3.5" Y="3.25" Width="1.5" />
+  <Class Name="MetaPong.Utilities.ScreenElements.Label" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>ScreenElements\Label.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MetaPong.Utilities.ScreenElements.Composit.Menu">
-    <Position X="7.75" Y="3.5" Width="1.5" />
+    <Position X="0.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAMAAAAAAAAAAAAIAAAAAAAAAAAAAAEAQAAAAAAEAAA=</HashCode>
       <FileName>ScreenElements\Composit\Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MetaPong.Utilities.ScreenElements.ScreenObject">
-    <Position X="0.5" Y="3.5" Width="2.25" />
+  <Class Name="MetaPong.Utilities.ScreenElements.MovingElement">
+    <Position X="5.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAACBACAAAAAABAAECAA=</HashCode>
-      <FileName>ScreenElements\ScreenObject.cs</FileName>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAQAAACBACAAAAAgBAAECAA=</HashCode>
+      <FileName>ScreenElements\MovingElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaPong.Utilities.ScreenElements.Composit.ScreenDecoration" Collapsed="true">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>ScreenElements\Composit\ScreenDecoration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaPong.Utilities.ScreenElements.Composit.Input" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>ScreenElements\Composit\Input.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaPong.Utilities.ScreenElements.Composit.Alert" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>ScreenElements\Composit\Alert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MetaPong.Utilities.ScreenElements.MenuItem" Collapsed="true">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScreenElements\MenuItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

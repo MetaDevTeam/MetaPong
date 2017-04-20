@@ -63,7 +63,6 @@
     <Compile Include="PongElements\GameObjects\PlayerBot.cs" />
     <Compile Include="PongElements\GameObjects\Player.cs" />
     <Compile Include="PongElements\GameController.cs" />
-    <Compile Include="PongElements\PrintElements\PrintResults.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
