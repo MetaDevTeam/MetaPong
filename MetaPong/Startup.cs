@@ -78,8 +78,8 @@
             // Construct the menu
             homeMenu.Add(new MenuItem(startRow, startColumn, "NEW GAME", Command.NewGame));
             homeMenu.Add(new MenuItem(startRow + 1, startColumn, "ADD USER", Command.AddUser));
-            homeMenu.Add(new MenuItem(startRow + 3, startColumn, "LOAD USER", Command.LoadUser));
-            homeMenu.Add(new MenuItem(startRow + 2, startColumn, "OPTIONS", Command.Options));
+            homeMenu.Add(new MenuItem(startRow + 2, startColumn, "LOAD USER", Command.LoadUser));
+            homeMenu.Add(new MenuItem(startRow + 3, startColumn, "OPTIONS", Command.Options));
             homeMenu.Add(new MenuItem(startRow + 4, startColumn, "LOAD GAME", Command.Load));
             homeMenu.Add(new MenuItem(startRow + 5, startColumn, "EXIT", Command.Exit));
 
