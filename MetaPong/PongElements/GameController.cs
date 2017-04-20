@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading;
-    using DrawElements;
+    using GameObjects;
     using Utilities.Enumeration;
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
@@ -14,8 +14,6 @@
         private int _horizontalMiddle;
         private Label _score;
         private int _speed;
-        private const string ScoresTemplate = "{0} sored!";
-        private const string WinsTemplate = "{0} WINS!";
 
         /// <summary>
         /// Initializes a new instance of the MetaPong game.<see cref="GameController"/> class.
@@ -40,10 +38,6 @@
             // scre lable
             Score = new Label(0, _horizontalMiddle - 1, $"{PlayerOne._score}-{PlayerTwo._score}");
 
-            // alerts
-            MessageWins = new Alert(_verticalMiddle, _horizontalMiddle, WinsTemplate);
-            MessageScores = new Alert(_verticalMiddle, _horizontalMiddle, ScoresTemplate);
-
             _speed = speed;
             MaxScore = maxScore;
         }
@@ -53,8 +47,6 @@
         public Ball Ball { get; set; }
         public Label Score { get; set; }
         public int MaxScore { get; set; }
-        public Alert MessageScores { get; set; }
-        public Alert MessageWins { get; set; }
 
         public void Load()
         {
@@ -93,8 +85,14 @@
 
         private void PongBall()
         {
+            bool isUpperCollisionOne = Ball.Row >= PlayerOne.Row - Ball.Radius;
+            bool isLowerColisionOne = Ball.Row <= PlayerOne.Row + PlayerOne.Height + Ball.Radius;
+
+            bool isUpperCollisionTwo = Ball.Row >= PlayerTwo.Row - Ball.Radius;
+            bool isLowerColisionTwo = Ball.Row <= PlayerTwo.Row + PlayerTwo.Height + Ball.Radius;
+
             if (Ball.Right && 
-                Ball.Column == Ball.LastCol && 
+                Ball.ColumnDestination == Ball.PongRight && 
                 Aligned(PlayerTwo))
             {
                 Ball.Right = false;
@@ -107,8 +105,9 @@
 
         private bool Aligned(Player player)
         {
-            return Ball.Row <= player.Row - Ball.Radius && 
-                   Ball.Row >= player.Row + player.Height + Ball.Radius;
+            bool isUpperCollision = Ball.RowDestination >= player.RowDestination - Ball.Radius;
+            bool isLowerColision = Ball.RowDestination <= player.RowDestination + player.Height + Ball.Radius;
+            return isUpperCollision && isLowerColision;
         }
 
         // Score methods
@@ -194,6 +193,9 @@
 
             // iterate ball
             Ball.Tick();
+            
+            //Check pong
+            PongBall();
 
             // draw first playe on screen
             PlayerOne.Move();
@@ -203,9 +205,6 @@
 
             // draw the ball
             Ball.Move();
-
-            //Check pong
-            PongBall();
 
             // update score
             UpdateScore();

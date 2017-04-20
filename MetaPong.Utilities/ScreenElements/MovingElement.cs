@@ -25,6 +25,18 @@
             _visible = false;
         }
 
+        public int RowDestination
+        {
+            get { return _rowDestination; }
+            set { _rowDestination = value; }
+        }
+
+        public int ColumnDestination
+        {
+            get { return _columnDestination; }
+            set { _columnDestination = value; }
+        }
+
         public void SetLayout(string[] layout)
         {
             _layout = layout;

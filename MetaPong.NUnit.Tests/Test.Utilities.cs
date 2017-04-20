@@ -2,7 +2,7 @@
 {
     using System;
     using global::NUnit.Framework;
-    using PongElements.DrawElements;
+    using PongElements.GameObjects;
     using Utilities;
     using static Startup;
 

@@ -2,11 +2,10 @@
 {
     using CmdArt;
     using CmdArt.Screen;
-    using PongElements.DrawElements;
+    using PongElements.GameObjects;
     using System;
     using System.Threading;
     using PongElements;
-    using PongElements.PrintElements;
     using Utilities;
     using Utilities.Enumeration;
     using Utilities.Input;
@@ -136,9 +135,7 @@
                 case Command.HomeScreen:
                     //end game clear da go to home screen
                     Console.Clear();
-                    ResetScore();
                     HomeScreen(ScreenWidth,ScreenHeight);
-
                     break;
             }
         }
@@ -154,12 +151,6 @@
             var game = new GameController(playerOne, playerTwo, speed, maxPoints);
 
             game.Load();
-        }
-
-        public static void ResetScore()
-        {
-            PrintResults.firstPlayerResults = 0;
-            PrintResults.secondPlayerResults = 0;
         }
 
         public static void RenderLogo(int startRow, int startColumn)
