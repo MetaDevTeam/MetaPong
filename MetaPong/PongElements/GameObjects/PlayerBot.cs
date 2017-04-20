@@ -8,7 +8,7 @@
         private static readonly Random Random = new Random();
         private int _accuracy;
 
-        public PlayerBot(int row, int column, string side, int accuracy) : base(row, column)
+        public PlayerBot(int row, int column, string side, int accuracy, string username = "") : base(row, column, username)
         {
             Accuracy = accuracy;
         }

@@ -6,7 +6,8 @@
     using Utilities.Enumeration;
     using Utilities.ScreenElements;
     using Utilities.ScreenElements.Composit;
-
+    using Data.ImportData;
+    using Data;
 
     public class GameController
     {
@@ -22,8 +23,9 @@
         /// <param name="playerTwo">The second player controlled by a bot. </param>
         /// <param name="speed">Larger values make the game slower.</param>
         /// <param name="maxScore">Defines the score at which the game ends.</param>
-        public GameController(Player playerOne, PlayerBot playerTwo, int speed=50, int maxScore=10)
+        public GameController(MetaPongContext context, Player playerOne, PlayerBot playerTwo, int speed=50, int maxScore=10)
         {
+            
             // set players
             PlayerOne = playerOne;
             PlayerTwo = playerTwo;
@@ -40,15 +42,17 @@
 
             _speed = speed;
             MaxScore = maxScore;
+            Context = context;
         }
 
+        public MetaPongContext Context { get; set; }
         public Player PlayerOne { get; set; }
         public PlayerBot PlayerTwo { get; set; }
         public Ball Ball { get; set; }
         public Label Score { get; set; }
         public int MaxScore { get; set; }
 
-        public void Load()
+        public void Load(MetaPongContext context)
         {
             Console.Clear();
             PlayerOne.Print();
@@ -73,6 +77,11 @@
                     }
                     if (keyInfo.Key == ConsoleKey.Escape)
                     {
+                        bool playerWin = PlayerOne.Score == MaxScore;
+
+                        int scoreDiference = MaxScore - PlayerOne.Score;
+
+                        Import.ImportGame(context, playerWin, PlayerOne.Username, scoreDiference);
                         ExecCommand(Command.HomeScreen);
                     }
                 }
@@ -168,7 +177,7 @@
             alert.Clear();
         }
 
-        public void ExecCommand(Command command)
+        public void ExecCommand( Command command)
         {
             switch (command)
             {
@@ -181,7 +190,7 @@
                     //end game clear da go to home screen
                     Console.Clear();
                     ResetScores();
-                    Startup.HomeScreen(Console.BufferWidth, Console.BufferHeight);
+                    Startup.HomeScreen(Context, Console.BufferWidth, Console.BufferHeight);
                     break;
             }
         }

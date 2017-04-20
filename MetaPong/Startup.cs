@@ -13,6 +13,7 @@
     using Utilities.ScreenElements.Composit;
     using Data;
     using Data.ImportData;
+    using System.Linq;
 
     public class Startup
     {
@@ -21,8 +22,9 @@
         public const int ScreenHeight = 40;
         public const int MaxPoints = 5;
         public const int Speed = 50;
+        static string username = "";
 
-        public static void HomeScreen(int width, int height)
+        public static void HomeScreen(MetaPongContext context, int width, int height)
         {
             // Setup screen
             int windowWidth = width; //Console.LargestWindowWidth; or 130
@@ -51,8 +53,8 @@
             int player1Row = random.Next(1, windowHeight-playerHeight);
             int player2Row = random.Next(1, windowHeight-playerHeight);
 
-            var playerOne = new Player(player1Row,"Left");
-            var playerTwo = new Player(player2Row,"Right");
+            var playerOne = new Player(player1Row,"Left","");
+            var playerTwo = new PlayerBot(player2Row,"Right",100);
 
             // Ball
             int ballSize = 2;
@@ -103,39 +105,54 @@
                         break;
                     case Command.Execute:
                         Command menuCommand = (homeMenu.GetSelected()).Command;
-                        ExecCommand(menuCommand);
+                        ExecCommand(context, menuCommand);
                         break;
                 }
             }
         }
 
-        public static void ExecCommand(Command command)
+        public static void ExecCommand(MetaPongContext context, Command command)
         {
-            var context = new MetaPongContext();
+            
 
             switch (command)
             {
                 case Command.NewGame:
-                    RenderLogo(2, 35);
-                    Thread.Sleep(1000);
-                    RunPong(Speed,MaxPoints);
+                    if (!context.Users.Any(u => u.Username == Startup.username))
+                    {
+                        var meserge = "Please Load/Create user!";
+                        Console.WriteLine(meserge);
+                        Console.ReadKey(true);
+                        HomeScreen(context, Startup.ScreenWidth, Startup.ScreenHeight);
+                    }
+                    else
+                    {
+                        RenderLogo(2, 35);
+                        Thread.Sleep(1000);
+                        RunPong(context, Speed, MaxPoints);
+                    }
                     break;
                 case Command.AddUser:
                     var alert = new Input(ScreenHeight / 2, ScreenWidth / 2, "Add Username:", 15);
                     alert.Print();
                     var username = Console.ReadLine();
                     Import.ImportUser(context, username);
-                    HomeScreen(ScreenWidth, ScreenHeight);
+                    HomeScreen(context, ScreenWidth, ScreenHeight);
                     break;
                 case Command.LoadUser:
                     var loadAlert = new Input(ScreenHeight / 2, ScreenWidth / 2, "Load User:", 15);
                     loadAlert.Print();
                     var user = Console.ReadLine();
-                    var mesege = Import.GetUser(context, user);
+                    var result = Import.GetUser(context, user);
+                    var mesege = result[0];
+                    if (result.Count == 2)
+                    {
+                        Startup.username = result[1];
+                    }
                     var resultAlert = new Alert(ScreenHeight / 2, ScreenWidth / 2, mesege);
                     resultAlert.Print();
                     Console.ReadKey(true);
-                    HomeScreen(ScreenWidth, ScreenHeight);
+                    HomeScreen(context, ScreenWidth, ScreenHeight);
                     break;
                 case Command.Exit:
                     Console.Clear();
@@ -145,22 +162,22 @@
                 case Command.HomeScreen:
                     //end game clear da go to home screen
                     Console.Clear();
-                    HomeScreen(ScreenWidth,ScreenHeight);
+                    HomeScreen(context, ScreenWidth,ScreenHeight);
                     break;
             }
         }
 
-        public static void RunPong(int speed, int maxPoints)
+        public static void RunPong(MetaPongContext context, int speed, int maxPoints)
         {
             const int verticalMiddle = ScreenHeight / 2;
             const int playerMiddle = verticalMiddle - 4;
 
-            var playerOne = new Player(playerMiddle,"Left");
+            var playerOne = new Player(playerMiddle,"Left", Startup.username);
             var playerTwo = new PlayerBot(playerMiddle,"Right", 60);
 
-            var game = new GameController(playerOne, playerTwo, speed, maxPoints);
+            var game = new GameController(context, playerOne, playerTwo, speed, maxPoints);
 
-            game.Load();
+            game.Load(context);
         }
 
         public static void RenderLogo(int startRow, int startColumn)
@@ -192,7 +209,7 @@
         static void Main()
         {
 
-            //var context = new MetaPongContext();
+            var context = new MetaPongContext();
             //context.Database.Initialize(true);
 
             ////User for test.
@@ -213,9 +230,9 @@
             //Import.ImportGame(context, true, user2);
             //Import.ImportGame(context, false, user3);
 
-            HomeScreen(ScreenWidth,ScreenHeight);
+            HomeScreen(context, ScreenWidth,ScreenHeight);
 
-            RunPong(Speed,MaxPoints);
+            RunPong(context, Speed,MaxPoints);
             
         }
     }

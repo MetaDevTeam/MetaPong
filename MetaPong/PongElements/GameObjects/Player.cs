@@ -13,27 +13,36 @@
 
         //TODO organize it OOP way in an object
         private const int ScreenHeight = 40;
+        private string _username;
 
-        public Player(int row, int column) : base(row, column)
+        public Player(int row, int column, string username = "") : base(row, column)
         {
             _layout = Composer.Compose(Composer.MakeBoxLayout(Width, Height));
             _changed = true;
             _score = 0;
+            Username = username;
         }
 
-        public Player(int row, string side) : base(row)
+        public Player(int row, string side, string username = "") : base(row)
         {
             _column = GetSide(side);
             ColumnDestination = _column;
             _layout = Composer.Compose(Composer.MakeBoxLayout(Width,Height));
             _changed = true;
             _score = 0;
+            Username = username;
         }
 
         public int Score
         {
             get { return _score; }
             set { _score = value; }
+        }
+
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value; }
         }
 
         private int GetSide(string side)
