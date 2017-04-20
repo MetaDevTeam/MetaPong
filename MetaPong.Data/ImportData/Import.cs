@@ -29,6 +29,25 @@ namespace MetaPong.Data.ImportData
             }
         }
 
+        public static string GetUser(MetaPongContext context, string user)
+        {
+            //var dataUser = context.Users
+            //    .Where(u => u.Username == username)
+            //    .FirstOrDefault();
+            string mesege = "";
+
+            if (context.Users.Any(u => u.Username == user))
+            {
+                mesege = $"{user} Loaded!";
+            }
+            else
+            {
+                mesege = $"{user} doesn't exist. Please, create one!";
+            }
+
+            return mesege;
+        }
+
         public static void ImportGame(MetaPongContext context, bool scoreWin, string username)
         {
             var dataUser = context.Users

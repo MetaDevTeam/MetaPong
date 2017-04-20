@@ -9,7 +9,7 @@
         NewGame,
         AddUser,
         Options,
-        Save,
+        LoadUser,
         Load,
         Back,
         HomeScreen,

@@ -76,8 +76,8 @@
             // Construct the menu
             homeMenu.Add(new MenuItem(startRow, startColumn, "NEW GAME", Command.NewGame));
             homeMenu.Add(new MenuItem(startRow + 1, startColumn, "ADD USER", Command.AddUser));
+            homeMenu.Add(new MenuItem(startRow + 3, startColumn, "LOAD USER", Command.LoadUser));
             homeMenu.Add(new MenuItem(startRow + 2, startColumn, "OPTIONS", Command.Options));
-            homeMenu.Add(new MenuItem(startRow + 3, startColumn, "SAVE GAME", Command.Save));
             homeMenu.Add(new MenuItem(startRow + 4, startColumn, "LOAD GAME", Command.Load));
             homeMenu.Add(new MenuItem(startRow + 5, startColumn, "EXIT", Command.Exit));
 
@@ -125,6 +125,16 @@
                     alert.Print();
                     var username = Console.ReadLine();
                     Import.ImportUser(context, username);
+                    HomeScreen(ScreenWidth, ScreenHeight);
+                    break;
+                case Command.LoadUser:
+                    var loadAlert = new Input(ScreenHeight / 2, ScreenWidth / 2, "Load User:", 15);
+                    loadAlert.Print();
+                    var user = Console.ReadLine();
+                    var mesege = Import.GetUser(context, user);
+                    var resultAlert = new Alert(ScreenHeight / 2, ScreenWidth / 2, mesege);
+                    resultAlert.Print();
+                    Console.ReadKey(true);
                     HomeScreen(ScreenWidth, ScreenHeight);
                     break;
                 case Command.Exit:
